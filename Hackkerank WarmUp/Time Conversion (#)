@@ -1,0 +1,21 @@
+    public static String timeConversion(String s) {
+        StringBuilder sb = new StringBuilder("");
+        int h = Character.getNumericValue(s.charAt(0))*10 + Character.getNumericValue(s.charAt(1)); 
+        if(s.charAt(8)=='P'){  //if PM
+            if(h+12==24) sb.append("12");
+            else sb.append(Integer.toString((h+12)));
+        }
+        else if(s.charAt(8)=='A'){  //if AM
+            if(h-12==0) sb.append("00");  //if its 12 we need to make it 0 otherwise jsut simply add wha tis there
+            else sb.append(s.substring(0,2));
+        }
+        for(int i=2;i<s.length()-2;i++){    //adding rest of the things except the last two characters
+            sb.append(s.charAt(i));
+        }
+        return sb.toString();
+    }
+}
+
+LGOIC ---
+We only need to change the hours to convert the time from an AM/PM format to 24 hour format. We need to add +12 to the hours if the time is in PM. 
+We need to take care of 12:mm:ssAM types additionally as 12:mm:ssAM in a 24 hour format is 00:mm:ss. 12:mm:ssPM type values in 24 hour format are in the form 12:mm:ss.
