@@ -1,0 +1,42 @@
+    public static List<Integer> gradingStudents(List<Integer> grades) {
+        for(int i=0;i<grades.size();i++){
+            if(grades.get(i)<38) continue;
+            if(grades.get(i)%5==0) continue;
+            if(grades.get(i)%5!=0){
+                if(grades.get(i)%5>=3) grades.set(i, grades.get(i)+(5-grades.get(i)%5));
+            }
+        }
+        return grades;
+    }
+
+
+
+LOGIC ---
+eg - 71
+71>38
+71%5!=0
+71%5=1 
+Our advantage is that only foorward rounding is allowed
+When taking %5 of some number we will be dividing them with a multiple of 5 that is less than or equal to grade.
+71 was divided by 70 and remaidner is 1.
+Differnece between 71 and 75 is 4.
+We want the differnece to be less than 3.
+So, 71 remains 71.
+Same with 72 and remainder is 2
+At 73 remainder when divided by 70 is 3 and difference between 75 and 73 is 2.
+So, instead of using the condition given in the problem of saying -
+"If the difference between the grade and the next multiple of 5 is less than 3, round grade up to the next multiple of 5."
+We can conversely say that the modulo of grade with 5 should be >=3. And we will just tkae the next multiple of 5. either by adding 
+
+
+grade remainder difference-with-next-multiple
+70      0           5
+71      1           4
+72      2           3
+73      3           2   (do roundup)
+74      4           1   (do roundup)
+
+differnece-with-next-multiple-of-5 = 5 - remainder
+grade + difference-with-next-multiple= next-multiple-of-5
+So,
+next-multiple-of-5 = grade + (5 - remainder) = grade + (5 - grade%5)
