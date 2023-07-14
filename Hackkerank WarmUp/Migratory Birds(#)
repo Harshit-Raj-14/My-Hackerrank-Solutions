@@ -1,4 +1,25 @@
+/* O(n) SOLUTION */
     public static int migratoryBirds(List<Integer> arr) {
+        int count[] = new int[6];
+        for(int i=0;i<arr.size();i++){
+            count[arr.get(i)]++;
+        }
+        int type=1;
+        for(int i=0;i<count.length;i++){
+            if(count[type]<count[i]) type=i;
+        }
+        return type;
+    }
+
+LOGIC --- THIS IS THE EASIEST SOLUTION ON ENTIRE HACKERRANK
+Given number of types is not greater than 5 in constraints
+So, size of count array is 5. count[6] size.
+Now in second for loop we will only move to the next type only if it exceeds becuase we will have to return the lesser of the type is max count is same for more than one.
+
+
+
+/* O(nlogn) ACCEPTED SOLUTION USING SORTING */
+public static int migratoryBirds(List<Integer> arr) {
         Collections.sort(arr);
         HashMap<Integer, Integer> map=new HashMap<>();
         for(int i=0;i<arr.size();i++){
