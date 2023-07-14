@@ -1,0 +1,21 @@
+    public static int pairs(int k, List<Integer> arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count=0;
+        for(int i=0;i<arr.size();i++){
+            map.put(arr.get(i),i);
+        }
+        for(int i=0;i<arr.size();i++){
+            if(map.containsKey(arr.get(i)-k) && map.get(arr.get(i)-k)!=i){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+LOGIC ----
+SAME AS TWO SUM LOGIC
+the only differnece is we are subtracting here
+a1-a2=k
+=> a1+(-k)=a2    => at the end its a sum only
+that's the logic
