@@ -1,0 +1,45 @@
+PS: Given an array of integers, find the longest subarray where the absolute difference between any two elements is less than or equal to 1.
+
+/* O(n) USING HASHING */
+    public static int pickingNumbers(List<Integer> arr) {
+        int max=0;
+        for(int i=0;i<arr.size();i++){
+            max=Math.max(max, arr.get(i));
+        }
+        int count[] = new int[max+1];
+        for(int i=0;i<arr.size();i++){
+            count[arr.get(i)]++;
+        }
+        int ans=0;
+        for(int i=1;i<count.length;i++){
+            ans=Math.max(ans, count[i]+count[i-1]);
+        }
+        return ans;
+    }
+
+LOGIC ---
+Make a counter array and get all frequencies.
+Now what we can do is see that the question asks us to find when differnce is less than 2 => difference is 1 or 0.
+So, that would be any two consecutive elements
+count[i]+count[i-1] => represents the sum of counts of numbers whose absolute difference is 1.
+
+
+
+/* BRUTE FORCE O(n^2) */
+    public static int pickingNumbers(List<Integer> arr) {
+        int ans=0;
+        for(int i=0;i<arr.size();i++){
+            int count=0;
+            for(int j=0;j<arr.size();j++){
+                if(j!=i){
+                    if(Math.abs(arr.get(i)-arr.get(j))<2) count++;  //less than or equal to 1
+                }
+            }
+            ans=Math.max(ans, count);
+        }
+        return ans;
+    }
+
+LOGIC ---
+Just do what the question asks and check for each element.
+Print the max.
