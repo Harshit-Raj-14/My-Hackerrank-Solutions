@@ -1,0 +1,25 @@
+    public static int countingValleys(int steps, String path) {
+        int heights[] = new int[steps];
+        heights[0] = (path.charAt(0)=='U') ? 1 : -1;
+        for(int i=1;i<path.length();i++){
+            int updown = (path.charAt(i)=='U') ? 1 : -1;
+            heights[i]=heights[i-1]+ updown;
+        }
+        int count0=0;
+        for(int i=1;i<heights.length;i++){
+            if(heights[i]==0 && path.charAt(i)=='U') count0++;   //reach to sea level from bottom
+        }
+        return count0;
+    }
+
+
+LOGIC ---
+    Entering and leaving a valley is defined by going down the sea level and returning to the sea level
+    Let sea leve be at 0;
+    u==+1
+    d==-1
+    Make a heights array which is actually the prefix height based on path
+    Note we always start from sea level so it's like heights[-1]=0
+    So, the number of valleyes = number of zero encountered in our heights array after they climbed from bottom
+    Condition :
+    Correct condition : heights[i]==0 && path.charAt(i)=='U' ==> meaning reaching sea level at i by using U (climbing up the valley to reach sea level)
