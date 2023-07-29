@@ -1,0 +1,19 @@
+LOGIC ---
+a[]
+b[]
+We have to find x such that:
+x is multiple of first array
+x is factor of second array
+
+eg: a:[2,6]
+b:[24,36]
+
+Multiples of first array:
+2 = 2,4,6,8,10,12,14,16,....
+6 = 6,12,18,24,30,36,....
+
+Factors of second array:
+24 - 2,3,4,6,8,12
+36 - 2,3,4,6,9,12,18
+
+Common numbers from a and b are - x=6,12
