@@ -1,0 +1,9 @@
+    public static int designerPdfViewer(List<Integer> h, String word) {
+        int maxheight=0;
+        for(int i=0;i<word.length();i++){
+            int currheight = h.get(word.charAt(i)-'a'); //we are refrencing the height list which has height of all alphabets
+            maxheight=Math.max(maxheight, currheight);
+        }
+        int length = word.length()*1;
+        return maxheight*length; 
+    }
