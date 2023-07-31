@@ -1,0 +1,10 @@
+    public static List<Integer> permutationEquation(List<Integer> p) {
+        int x = p.size();
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i=1;i<=x;i++){
+            for(int j=0;j<p.size();j++){
+                if(p.get(p.get(j)-1)==i) ans.add(j+1);
+            }
+        }
+        return ans;
+    }
