@@ -1,0 +1,26 @@
+public static List <Integer> jimOrders(List<List<Integer>> orders) {
+    HashMap <Integer, Integer> map = new HashMap < > ();
+    for (int i = 0; i <orders.size(); i++) {
+        int orderno = orders.get(i).get(0);
+        int prept = orders.get(i).get(1);
+        map.put(i+1, orderno+prept); //customers 1 indexed
+    }
+    List <Map.Entry<Integer,Integer>> sortedOrders = new ArrayList<>(map.entrySet());  //copying map to arraylist
+    Collections.sort(sortedOrders, (o1, o2) -> o1.getValue() - o2.getValue());
+    ArrayList <Integer> ans = new ArrayList <>();
+    for (Map.Entry <Integer,Integer> entry: sortedOrders) {
+        ans.add(entry.getKey());
+    }
+    return ans;
+}
+
+LOGIC ---
+map<customerno, orderno+preptime)
+
+Now we copy map to list to sort it while keeping its custmoer no. intact
+To do this, a custom comparator is provided using a lambda expression (o1, o2) -> o1.getValue() - o2.getValue(). 
+This comparator compares the values (total times) associated with the entries in the sortedOrders list.
+
+
+
+THE PROBLEM I AM FACING IS SORTING A SEQUENC EOF VALUES HAVING A NUMBER ASSOCIATED WITH THEM WITHOUT ALTERING THAT
