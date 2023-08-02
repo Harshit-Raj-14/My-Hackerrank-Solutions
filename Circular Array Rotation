@@ -1,0 +1,37 @@
+/* O(n) SOLUTION using Collections.rotate(list,k) */
+    public static List<Integer> circularArrayRotation(List<Integer> arr, int k, List<Integer> queries) {
+        //Right rotating the array k times
+        Collections.rotate(arr, k);
+        //making queries
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i=0;i<queries.size();i++){
+            ans.add(arr.get(queries.get(i)));
+        }
+        return ans;
+    }
+
+LOGIC ---
+there are 3 ways  to rotate array k time sin O(n) method:
+using auxiliary array
+using modulus
+using reverse algorithm
+Implementation of these methods - https://github.com/Harshit-Raj-14/my-DSA/blob/main/DSA%20topics/Array%20Rotation%20and%20Shifting.md
+
+
+/* BRUTE FORCE O(n^2) */
+    public static List<Integer> circularArrayRotation(List<Integer> arr, int k, List<Integer> queries) {
+        //Right rotating the array k times
+        for(int i=1;i<=k;i++){
+            int last=arr.get(arr.size()-1);
+            for(int j=arr.size()-1;j>0;j--){
+                arr.set(j,arr.get(j-1));
+            }
+            arr.set(0,last);
+        }
+        //making queries
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i=0;i<queries.size();i++){
+            ans.add(arr.get(queries.get(i)));
+        }
+        return ans;
+    }
