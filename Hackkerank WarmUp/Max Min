@@ -1,0 +1,34 @@
+/* SLIDING WINDOW O(nlogn) */
+public static int maxMin(int k, List<Integer> arr) {
+        Collections.sort(arr);
+        int maxminwindow=Integer.MAX_VALUE;
+        int currminwindow=0;
+        for(int i=0;i<arr.size();i++){
+            if(i+k<=arr.size()) currminwindow=arr.get(i+k-1)-arr.get(i);
+            maxminwindow=Math.min(maxminwindow, currminwindow);
+        }
+        return maxminwindow;
+    }
+
+
+NOTE - these two conditions for passing all test cases
+i+k<=arr.size()
+rr.get(i+k-1)-arr.get(i)
+
+Becuase we are taking i+k-1 we need to iterate till i+<=arr.size()
+
+
+/* ELEGANT SOLUTION */
+    public static int maxMin(int k, List<Integer> arr) {
+        Collections.sort(arr);
+        int maxminwindow=Integer.MAX_VALUE;
+        int currminwindow=0;
+        for(int i=0;i+k<=arr.size();i++){
+            currminwindow=arr.get(i+k-1)-arr.get(i);
+            maxminwindow=Math.min(maxminwindow, currminwindow);
+        }
+        return maxminwindow;
+    }
+
+LOGIC ---
+We move a sliding widnow from all indexes of k size of the sorted array to find the min max difference.
