@@ -1,0 +1,21 @@
+    public static String gameOfThrones(String s) {
+        int count[] = new int [26];
+        for(int i=0;i<s.length();i++){
+            count[s.charAt(i)-'a']++;
+        }
+        int oddoccurence=0;
+        for(int i=0;i<count.length;i++){
+            if(count[i]%2!=0){
+                oddoccurence++;
+            }
+        }
+        if(oddoccurence>1) return "NO";
+        else return "YES";
+    }
+
+/*
+LOGIC ---
+For any string to be a palindrome the conditions are:
+If the length of word is even : all letters frequency should be even.(eg: aabb)
+If the length of word is odd : n-1 distinct elements should be even and one character should be odd. (eg: b, aab, bbba, aaa)
+*/
