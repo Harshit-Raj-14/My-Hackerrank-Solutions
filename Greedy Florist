@@ -1,0 +1,38 @@
+    static int getMinimumCost(int k, int[] arr) {
+        Arrays.sort(arr);
+        int customerIndex=1;
+        int visitno=1;
+        int cost=0;
+        for(int i=arr.length-1;i>=0;i--){
+            if(customerIndex<=k){   //while number of friends make their first visit and so on
+                cost+=visitno*arr[i];
+                customerIndex++;
+            }
+            if(customerIndex>k){
+                customerIndex=1;    //we again start coming for another visit
+                visitno++;
+            }
+        }
+        return cost;
+    }
+
+/*
+LOGIC---
+The question gives us -> arr[] -> price of flowers(c[])
+To make boquet you need all the flowers in array. So flowers to buy=length of array
+No. of friends=k
+If a person again visits the shop to buy another flower the price oft hat flower is multiplied by the no. of the time he visited
+So, first visit = 1*c[i];
+second visit = 2*c[i];
+
+GENERAL CASES --
+When the number of friends k>=c[].length => that means no need of any second visit and the final cost of bouqet wil be the simple sum of array as each friend go to buy one flower
+
+When the number of friends k<arr.length => that means friends have to make a second visit or more to get all flowers
+The best course of action is to again iterate with second visit for each friedn to get additonal flowers. And if we still need more flowers start the third visit of frineds. And so on...
+
+Approach---
+Sort the array to bring all the cheap flowers in front. 
+Now a thought if you were to make a second visit to get the next flower. Would you go for the costlier one or the cheaper ones. The cheaper ones evne on multiplication with the visit number will fetch smaller cost. So, it would be only right that for the first visit we travel form back of array to buy the costlier ones in frist visit alone.
+We will lopp till we reach form the end to start of array.
+*/
