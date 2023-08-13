@@ -1,0 +1,47 @@
+/* O(n) */
+    public static int maximizingXor(int l, int r) {
+        int xor = l ^ r;
+        int ret = 1;
+        while (xor != 0) {
+            ret <<= 1;
+            xor >>= 1;
+        }
+        return (ret - 1);
+    }
+
+/* O(n) */
+    public static int maximizingXor(int l, int r) {
+        int xor = l ^ r;
+        // Calculate the most significant bit position of xor
+        int msbPosition = 31 - Integer.numberOfLeadingZeros(xor);
+        // Calculate the maximum XOR value by setting all bits from msbPosition downwards
+        int maxXor = (1 << (msbPosition + 1)) - 1;
+        return maxXor;
+    }
+
+
+/* O(1) OPTIMISED SOLUTION */
+    public static int maximizingXor(int l, int r) {
+        int xor=l^r;
+        xor |= xor >> 1;
+        xor |= xor >> 2;
+        xor |= xor >> 4;
+        xor |= xor >> 8;
+        xor |= xor >> 16;
+        return xor;
+    }
+
+
+
+/* BRUTE FORCE O(n^2) */
+    public static int maximizingXor(int l, int r) {
+        int max=0;
+        for(int i=l;i<=r;i++){
+            int currmax=0;
+            for(int j=l;j<=r;j++){
+                currmax=i^j;
+                max=Math.max(max, currmax);
+            }
+        }
+        return max;
+    }
