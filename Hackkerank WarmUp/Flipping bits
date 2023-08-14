@@ -32,8 +32,21 @@ String result = Long.toBinaryString( n & 0xffffffffL | 0x100000000L ).substring(
 /* USING XOR */
 public static long flippingBits(long n) {
     long max = (1L << 32) -1;
-    
     long flipped = n ^ max;
-    
     return flipped;
 }
+
+LOGIC ---
+max is the maximum possible number with 32 bits - i.e. 1111111111...32 times
+max stores the maximum value for a 32-bit unsigned integer.
+It does this using a bit manipulation operation: shifting the bit '1' left by 32 positions. 
+This effectively sets the 33rd bit to 1, making it the maximum possible 32-bit value. 
+Subtracting 1 ensures that all the lower 32 bits are set to 1, resulting in a value representing the maximum 32-bit unsigned integer.
+Subtracting 1 ensures that all the lower 32 bits are set to 1, resulting in a value representing the maximum 32-bit unsigned integer.
+So, something like this is happening: max = (1L << 32) -1;
+
+Now by using XOR:
+Its something like 0^1=1
+1^1=0
+In a way we are doing something similar to a not operator(flipping)
+We finally return the flipped answer
