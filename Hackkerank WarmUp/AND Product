@@ -1,0 +1,6 @@
+Here are some optimisations:
+1) abort the for loop if you get the value 0, because it will stay 0 no matter what
+2)If there is a power of 2 between a and b, return 0 (you don't need a loop in that case)
+
+My Idea for O(1) is to think about which bits change between a and b.
+We know that if a zero appears at a single bit position its AND with anything will only give zero. In that case we cn fix the ans of that bit as zero.
