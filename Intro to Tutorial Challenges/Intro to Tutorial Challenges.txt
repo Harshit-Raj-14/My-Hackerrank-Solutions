@@ -1,0 +1,13 @@
+/* USING FOR LOOP */    
+    public static int introTutorial(int V, List<Integer> arr) {
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i)==V) return i;
+        }
+        return -1;
+    }
+
+
+/* indexOf(int num) inbuilt method */
+public static int introTutorial(int V, List<Integer> arr) {
+        return arr.indexOf(V);
+}
