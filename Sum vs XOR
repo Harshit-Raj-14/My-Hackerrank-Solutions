@@ -5,7 +5,7 @@
             if((n&1)==0) unsetbits++;
             n=n>>1;
         }
-        return (long)Math.pow(2,unsetbits);
+        return (long)Math.pow(2,unsetbits);    //return 1<<unsetbits
     }
 
 LOGIC---
