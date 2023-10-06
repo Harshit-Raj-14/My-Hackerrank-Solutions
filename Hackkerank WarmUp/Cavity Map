@@ -1,0 +1,22 @@
+    public static List<String> cavityMap(List<String> grid){
+        if(grid.size()<2) return grid;
+        ArrayList<String> ans = new ArrayList<>();
+        ans.add(grid.get(0));
+        for(int i=1;i<grid.size()-1;i++){
+            StringBuilder sb = new StringBuilder("");
+            sb.append(grid.get(i).charAt(0));
+            for(int j=1;j<grid.get(i).length()-1;j++){
+                if(grid.get(i).charAt(j)>grid.get(i-1).charAt(j)
+                && grid.get(i).charAt(j)>grid.get(i).charAt(j-1)
+                && grid.get(i).charAt(j)>grid.get(i).charAt(j+1)
+                && grid.get(i).charAt(j)>grid.get(i+1).charAt(j)){
+                    sb.append("X");   
+                }
+                else sb.append(grid.get(i).charAt(j));
+            }
+            sb.append(grid.get(i).charAt(grid.get(i).length()-1));
+            ans.add(sb.toString());
+        }
+        ans.add(grid.get(grid.size()-1));
+        return ans;
+    }
