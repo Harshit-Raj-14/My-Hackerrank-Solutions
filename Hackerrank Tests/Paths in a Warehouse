@@ -1,0 +1,11 @@
+Problem Statement:
+A forklift worker moves products from one place to the other in an automotive parts warehouse. 
+There a map in the dashboard that shows, in real time, the open and blocked sections inside the warehouse. 
+The map is displayed as an nxm matrix of 1's and O's which represent open and blocked sections respectively. 
+A forklift driver always starts at the upper left corner of the map at warehouse[0][0] and tries to reach 
+the bottom right section of the map or warehouse[n-1][m-1). Each movement must be in increasing value along a 
+row or column but not both. Given the warehouse map, determine the number of distinct paths to get from 
+warehouse[0][0] to warehouse[n-1][m-1). 
+The number may be large, so return the value modulo (10 9 +7).
+
+link - https://github.com/LeetCode-Study-Team/solutions/wiki/8%EC%A3%BC%EC%B0%A8-%EC%9D%BC%EC%9A%94%EC%9D%BC-1-1

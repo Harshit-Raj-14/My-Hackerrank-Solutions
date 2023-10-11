@@ -1,0 +1,16 @@
+The physicists of Hackerland are working on an algorithm to create waves. An array can be represented as a wave if either of the following conditions is satisfied:
+• a1> a2 and a 2< a3 and a3> a4 and so on.
+• a₁< a2 and a2> a3 and a3 a4 and so on.
+where a[i] is the ith element of the array a.
+Given an array arr of n integers, consisting of integers in the range 1 to m inclusive, or -1, find the number of ways to replace all the -1s in the array with an integer in the range 1 to m such that the resulting array can be represented as a wave. Since the answer can be large, compute it modulo 109 + 7.
+Example
+Suppose n = 3, arr= [-1, 3, -1], m = 3
+The possible ways to replace all -1s in the array such that the resulting array is a wave array are-
+• [1, 3, 2]
+[1, 3, 1]
+⚫ [2, 3, 1]
+⚫ [2, 3, 2]
+Hence the answer is 4.
+
+
+link - https://leetcode.com/discuss/interview-question/750543/wave-arraygoogle-adobe-amazon-how-to-do-it-on-time

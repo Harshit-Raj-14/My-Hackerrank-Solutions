@@ -1,0 +1,105 @@
+PROBLEM STATEMENT:
+
+Given a string, s, a substring is defined as a non-empty string that can be obtained by one of the following means:
+
+    Remove zero or more characters from the left side of s.
+    Remove zero or more characters from the right side of s.
+    Remove zero or more characters from the left side of s and remove zero or more characters from the right side of s.
+
+For example, let s = abcde. The substrings are:
+
+    abcde
+    abcd
+    bcde
+    abc
+    bcd
+    cde
+    ab
+    bc
+    cd
+    de
+    a
+    b
+    c
+    d
+    e
+
+Function Description:
+Complete the function substringCalculator in the editor below. The function must return the number of distinct substrings of s.
+
+Input: kincenvizh
+Output: 53
+
+Explanation:
+1 kincenvizh
+2 kincenviz
+3 kincenvi
+4 kincenv
+5 kincen
+6 kince
+7 kinc
+8 kin
+9 ki
+10 k
+11 incenvizh
+12 incenviz
+13 incenvi
+14 incenv
+15 incen
+16 ince
+17 inc
+18 in
+19 i
+20 ncenvizh
+21 ncenviz
+22 ncenvi
+23 ncenv
+24 ncen 25 nce
+26 nc
+27 n
+28 cenvizh
+29 cenviz
+30 cenvi
+31 cenv
+32 cen
+33 ce
+34 C
+35 envizh
+36 enviz
+37 envi
+38 env
+39 en
+40 e
+41 nvízh
+42 nviz
+43 nvi
+44 nv
+45 vizh
+46 viz
+47 vi
+48 v
+49 izh
+50 iz
+51 zh
+52 z
+53 h
+
+
+
+
+
+/* O(n^2) TLE */ 
+    public static long substringCalculator(String s) {
+        HashSet<String> set = new HashSet<>();
+        long count=0;
+        for(int i=0;i<s.length();i++){
+            for(int j=i;j<s.length();j++){
+                String sub = s.substring(i, j+1);
+                if(!set.contains(sub)){
+                    set.add(sub);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
