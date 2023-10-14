@@ -1,0 +1,29 @@
+    public static List<Integer> stones(int n, int a, int b) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int x=0;    //number of stone swith diff a
+        while(x<n){
+            int lastStone = a*x + b*(n-x-1);
+            if(!ans.contains(lastStone)) ans.add(lastStone); 
+            x++;
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+    
+
+LOGIC---
+total number of stones = n
+Now x stones have a differnce of 'a' and y stones have a difference of 'b'.
+
+And our job is to find how far is the last stone could be.
+
+Note there are 'n' stones so 'n-1' differneces.
+x+y=n-1
+
+x=0 ; y=n-1 => last stone = a*x + b*y = 0+b(n-1)
+x=1 ; y=n-2 => last stone = a*x + b*y = 1a + b(n-2)
+
+x=x ; y=n-1-x => last stone = xa + b(n-1-x)
+And so on...
+
+keep the last stones in the arraylist without repititon and eturn the sorted list.
