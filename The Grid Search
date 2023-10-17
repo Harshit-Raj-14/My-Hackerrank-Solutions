@@ -1,0 +1,54 @@
+/* REDUCING ITERATIONS */
+    public static String gridSearch(List<String> G, List<String> P) {
+        char start=P.get(0).charAt(0);
+        for(int i=0;i<=G.size()-P.size()+1;i++){   //reducing iterations
+            for(int j=0;j<=G.get(0).length()-P.get(0).length()+1;j++){ //reducing iterations
+                if(G.get(i).charAt(j)==start){
+                    int currGrow=i;
+                    int currGcol=j;
+                    int move=1;
+                    for(int r=0;r<P.size() && move==1;r++){
+                        if(currGcol+P.get(r).length()<=G.get(i).length() && 
+                        P.get(r).equals(
+                    G.get(currGrow).substring(currGcol, currGcol+P.get(r).length()))){
+                            currGrow++;
+                        }
+                        else move=0;
+                    }
+                    if(move==1) return "YES";
+                }
+            }
+        }
+        return "NO";
+    }
+
+LOGIC --- 
+reduce the number of iterations by comparing each row of the pattern with each row of the sub-grid.
+
+
+
+/* O(n^4) TLE solution */
+    public static String gridSearch(List<String> G, List<String> P) {
+        char start=P.get(0).charAt(0);
+        for(int i=0;i<=G.size();i++){   //reducing iterations
+            for(int j=0;j<=G.get(0).length();j++){ //reducing iterations
+                if(G.get(i).charAt(j)==start){
+                    int currGrow=i;
+                    int currGcol=j;
+                    int move=1;
+                    for(int r=0;r<P.size() && move==1;r++){
+                        if(currGcol+P.get(r).length()<=G.get(i).length() && 
+                        P.get(r).equals(
+                    G.get(currGrow).substring(currGcol, currGcol+P.get(r).length()))){
+                            currGrow++;
+                        }
+                        else move=0;
+                    }
+                    if(move==1) return "YES";
+                }
+            }
+        }
+        return "NO";
+    }
+LOGIC---
+Every time you find an instance of a first match character with pattern, you make substring comparison from G with the rows in Pattern.
