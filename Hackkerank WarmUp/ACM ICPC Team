@@ -1,0 +1,34 @@
+    public static List<Integer> acmTeam(List<String> topic) {
+        int count[] = new int[topic.get(0).length()+1];    //total no of topics
+        int maxtopicknow=0;
+        for(int i=0;i<topic.size();i++){
+            for(int j=i+1;j<topic.size();j++){
+                int topicknow=0;
+                for(int k=0;k<topic.get(i).length();k++){
+                    if(topic.get(i).charAt(k)=='1' || topic.get(j).charAt(k)=='1') topicknow++;
+                }
+                maxtopicknow=Math.max(maxtopicknow, topicknow);
+                count[topicknow]++;  
+            }
+        }
+        int team=0;
+        int maxtopiccanbeknown=0;
+        for(int i=count.length-1;i>=0;i--){
+            if(count[i]!=0){
+                team=count[i];
+                maxtopiccanbeknown=i;
+                break;
+            }     
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(maxtopiccanbeknown);
+        ans.add(team);
+        return ans;
+    }
+
+
+/*
+LOGIC---
+Declare a count array and its size with no of topics.
+Increase count based on the numbe rof teams that knows that many topics.
+*/
