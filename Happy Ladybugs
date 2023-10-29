@@ -1,0 +1,26 @@
+    public static String happyLadybugs(String b){
+        int count[] = new int[26];
+        int swappossible=0;
+        int needofswap=0;
+        for(int i=0;i<b.length();i++){
+            if(b.charAt(i)!='_') count[b.charAt(i)-'A']++;
+            if(b.charAt(i)=='_') swappossible=1;
+            if(b.charAt(i)!='_' && (i-1>=0 && i+1<b.length()) && (b.charAt(i-1)!=b.charAt(i) && b.charAt(i)!=b.charAt(i+1))) needofswap=1;
+        }
+        if(swappossible!=1 && needofswap==1) return "NO";    //edge case the possibility of not being able to swap
+        for(int i=0;i<count.length;i++){
+            if(count[i]==1) return "NO";
+        }
+        return "YES";
+    }
+/*
+Logic---
+Simple logic is that when colors occur together they are happy.
+If you there are more than one color they can always be clubbed together to make them happy.
+Hence if there is only one color it will always be sad.
+So, if there is occurence of just one color a ladybug will be sad.
+And we cna never make them happy.
+Just like my life.
+EDGE CASE : There should be alteast one _ there to make the swaps posisble.
+But still there is another edge case where what if actually there was never the need to swap. eg :BBB should pass.
+*/
