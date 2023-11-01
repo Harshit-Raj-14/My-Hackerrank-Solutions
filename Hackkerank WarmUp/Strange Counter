@@ -1,0 +1,15 @@
+/* BRUTE FORCE TLE */
+    public static long strangeCounter(long t) {
+        long startvalue=3;
+        long currvalue=startvalue;
+        long starttime=1;
+        while(starttime!=t){
+            if(currvalue>1) currvalue--;
+            else{
+                startvalue*=2;
+                currvalue=startvalue;
+            }
+            starttime++;
+        }
+        return currvalue;
+    }
