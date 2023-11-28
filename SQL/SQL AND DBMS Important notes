@@ -1,7 +1,7 @@
 A file with . sql extension is a Structured Query Language (SQL) file.
-
+ACID -> 
 CRUD (Create, Read, Update, and Delete)
-
+-- is used to comment SQL queries.
 
 Query all attributes => Query all columns => SELECT * FROM db_name.table_name;
 
@@ -52,5 +52,39 @@ ROUND(SUM(LONG_W),2) as lon
 FROM STATION;
 
 
-    
-    
+
+/* SQL - COUNT Function */
+Syntax: SELECT COUNT(column_name) FROM table_name;     //ounting the number of records
+
+SELECT COUNT(*) FROM employee_tbl ;
++----------+
+| COUNT(*) |
++----------+
+|        7 |
++----------+
+
+SELECT (COUNT(CITY) - COUNT(DISTINCT(CITY))) FROM STATION;  // difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table. 
+
+
+
+/* SQL - ORDER BY Clause */
+syntax - SELECT column_name FROM table_name ORDER BY table_name ASC/DSC;    //SQL ORDER BY clause is used to sort the data in either ascending or descending order
+
+Note: WHERE function if you are using any condition comes before order by.
+Logic--- firs tyou find the column data using condtion, then only you sort all of them
+
+/* SQL - MAX Function */
+Syntax: SELECT MAX(column_name) -> FROM table_name;
+
+
+/* SQL LENGTH FUNCTION */
+Syntax: SELECT LENGTH(column_name) as new_clumn_name_you_want FROM table_name;
+SELECT LENGTH(CITY) as city_length FROM STATION;    //print length of all the data in that column works for all data types
+
+/* SQL - SUBSTRING() Function */
+SELECT SUBSTRING('Hello World', 2, 5) AS NEW_STRING;
++------------+
+| NEW_STRING |
++------------+
+| ello       |
++------------+
