@@ -2,5 +2,55 @@ A file with . sql extension is a Structured Query Language (SQL) file.
 
 CRUD (Create, Read, Update, and Delete)
 
+
+Query all attributes => Query all columns => SELECT * FROM db_name.table_name;
+
+SOME SYNTAX COMMANDS:
+
+SELECT DISTINCT(column_name) FROM table_name;
+
+/* SQL WHERE function */
+SELECT * FROM CUSTOMERS WHERE NAME = 'Ramesh';
+SELECT * from CUSTOMERS WHERE NAME IN ('Khilan', 'Hardik', 'Muffy');    //WHERE Clause with IN Operator
+SELECT * from CUSTOMERS WHERE AGE NOT IN (25, 23, 22);    //WHERE Clause with NOT IN Operator
+SELECT * FROM CUSTOMERS WHERE NAME LIKE 'K___%';    //WHERE Clause with LIKE Operator => Syntax: WHERE column_name LIKE pattern; => The WHERE clause with LIKE operator allows us to filter rows that matches a specific pattern. This specific pattern is represented by wildcards (such as %, _, [] etc).
+//the query would display all the records where the name starts with K and is at least 4 characters in length
+
+SELECT * FROM CUSTOMERS WHERE (AGE = 25 OR salary < 4500) AND (name = 'Komal' OR name = 'Kaushik');    //WHERE Clause with AND, OR Operators
+
+
+
+/* SQL SUM() function */
+Syntax:
+SELECT SUM(column_name) as give_a_new_table_name_to_this_sum FROM table_name;
+
+SELECT SUM(SALARY) as summation from CUSTOMERS;
+Output
++-----------+
+| summation |
++-----------+
+| 35000.00  |
++-----------+
+
+Now, suppose based on the above table we want to calculate the summation of distinct (unique) age of the customers
+SELECT SUM(DISTINCT AGE) as summation from CUSTOMERS;
+
+SELECT SUM(Salary) AS summation FROM CUSTOMERS WHERE AGE > 24;    //the summation of the salary of all customers whose age is greater than 24
+
+
+SELECT AGE, SUM(SALARY) as sal_sum from CUSTOMERS GROUP BY AGE HAVING SUM(SALARY)> 5000;
+//query returns the age of all the customers having salary greater than 5000. Since there are two customers with same age, one of whose salary is greater than 5000, so their salary is summed up
+
+
+/* SQL ROUND() function */
+Syntax: SELECT ROUND(column_name, your_scale) FROM table_name;    //your_scale->desired scale for rounding
+
+QUERY-> following two values from the STATION table: The sum of all values in LAT_N rounded to a scale of 2 decimal places. The sum of all values in LONG_W rounded to a scale of 2 decimal places.
+SELECT 
+ROUND(SUM(LAT_N),2) as lat, 
+ROUND(SUM(LONG_W),2) as lon 
+FROM STATION;
+
+
     
     
