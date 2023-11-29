@@ -1,0 +1,4 @@
+SELECT ROUND((AVG(SALARY)) - ROUND(AVG(REPLACE(SALARY, 0, '')))) FROM EMPLOYEES;
+
+
+Note: in this question do avg seperately, doing it after calculation gives wrong answer.
