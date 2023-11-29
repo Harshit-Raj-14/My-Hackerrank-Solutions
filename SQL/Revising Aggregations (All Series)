@@ -1,0 +1,11 @@
+Revising Aggregations - The Count Function
+SELECT COUNT(NAME) as count FROM CITY WHERE POPULATION>100000;
+
+
+Revising Aggregations - The Sum Function
+SELECT SUM(POPULATION) as sum FROM CITY WHERE DISTRICT='CALIFORNIA';
+
+
+Revising Aggregations - Averages
+SELECT AVG(POPULATION) as sum FROM CITY WHERE DISTRICT='CALIFORNIA';
+
