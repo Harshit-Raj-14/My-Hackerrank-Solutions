@@ -5,6 +5,17 @@ CRUD (Create, Read, Update, and Delete)
 
 Query all attributes => Query all columns => SELECT * FROM db_name.table_name;
 
+
+/* NESTING SELECT QUERIES */
+SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N=(SELECT MAX(LAT_N) FROM STATION WHERE  LAT_N<137.2345);
+//Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345. Round your answer to 4 decimal places.
+
+
+
+
+
+
+
 SOME SYNTAX COMMANDS:
 
 SELECT DISTINCT(column_name) FROM table_name;
@@ -51,6 +62,8 @@ ROUND(SUM(LAT_N),2) as lat,
 ROUND(SUM(LONG_W),2) as lon 
 FROM STATION;
 
+Note : if you want to round to nearest integer just make the scale 0.
+
 
 
 /* SQL - COUNT Function */
@@ -88,3 +101,38 @@ SELECT SUBSTRING('Hello World', 2, 5) AS NEW_STRING;
 +------------+
 | ello       |
 +------------+
+
+
+
+
+/* SQL Server LEFT() Function */
+The LEFT() function extracts a number of characters from a string (starting from left).
+LEFT(string, number_of_chars)
+
+Extract 5 characters from the text in the "CustomerName" column (starting from left):
+SELECT LEFT(CustomerName, 5) AS ExtractString
+FROM Customers; 
+
+
+/* SQL REPLACE() Function */
+The REPLACE() function replaces all occurrences of a substring within a string, with a new substring.
+Syntax: REPLACE(string, old_string, new_string)
+SELECT REPLACE('SQL Tutorial', 'SQL', 'HTML'); 
+
+
+
+/* SQL CODE - FOR TYPE OF TRIANGLE */
+SELECT
+    CASE
+        WHEN A+B<=C OR A+C<=B OR B+C<=A THEN 'Not A Triangle'
+        WHEN A=B AND B=C AND C=A THEN 'Equilateral'
+        WHEN A=B OR B=C OR A=C THEN 'Isosceles'
+        ELSE 'Scalene'
+    END
+as triangle_type
+FROM TRIANGLES;
+
+
+/* TOP EARNERS */
+SELECT MAX(SALARY * MONTHS), COUNT(NAME) FROM EMPLOYEE WHERE SALARY * MONTHS = (SELECT MAX(SALARY * MONTHS) FROM EMPLOYEE);
+//Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings.
