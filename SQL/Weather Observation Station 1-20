@@ -59,3 +59,29 @@ SELECT DISTINCT(CITY) FROM STATION WHERE SUBSTRING(CITY, 1,1) NOT IN('a', 'e', '
 Weather Observation Station 12
 SELECT DISTINCT(CITY) FROM STATION WHERE SUBSTRING(CITY, 1,1) NOT IN('a', 'e', 'i','o','u') AND SUBSTRING(CITY, LENGTH(CITY),LENGTH(CITY)) NOT IN('a', 'e', 'i','o','u'); 
 
+
+Weather Observation Station 13
+SELECT ROUND(SUM(LAT_N),4) FROM STATION WHERE LAT_N>38.7880 AND LAT_N<137.2345;
+
+
+Weather Observation Station 14
+SELECT ROUND(MAX(LAT_N),4) FROM STATION WHERE LAT_N<137.2345;
+
+
+Weather Observation Station 15
+SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N=(SELECT MAX(LAT_N) FROM STATION WHERE  LAT_N<137.2345);
+
+//Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345. Round your answer to 4 decimal places.
+///ANOTHER SMART ANSWER - Fidn the lat n and then arrange it descendingly and limit answer to porducing 1 output
+SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N<137.2345 ORDER BY LAT_N DESC LIMIT 1;
+
+
+Weather Observation Station 16
+SELECT ROUND(MIN(LAT_N),4) FROM STATION WHERE LAT_N>38.7780;
+
+
+Weather Observation Station 17
+SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N=(SELECT MIN(LAT_N) FROM STATION WHERE LAT_N>38.7780);
+
+//ANOTHER SOLUTION
+SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N>38.7780 ORDER BY LAT_N ASC LIMIT 1;
