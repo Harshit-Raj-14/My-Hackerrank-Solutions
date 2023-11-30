@@ -1,0 +1,28 @@
+Population Census 
+
+SELECT SUM(CITY.POPULATION) FROM CITY
+JOIN COUNTRY
+ON CITY.COUNTRYCODE = COUNTRY.CODE
+WHERE COUNTRY.CONTINENT ='ASIA';
+
+
+African Cities
+SELECT CITY.NAME FROM CITY
+JOIN COUNTRY
+ON CITY.COUNTRYCODE = COUNTRY.CODE
+WHERE COUNTRY.CONTINENT='Africa';
+/////INNER JOIN ALSO WORKS HERE
+
+
+Average Population of Each Continent
+SELECT COUNTRY.CONTINENT, FLOOR(AVG(CITY.POPULATION))
+FROM CITY
+JOIN COUNTRY 
+ON CITY.COUNTRYCODE = COUNTRY.CODE
+GROUP BY COUNTRY.CONTINENT;
+//For some reason round integer does not work, use floor method. Also, note the use case of group by reason being :
+//When you use an aggregate function like AVG() in SQL, it performs the calculation within each group defined by the GROUP BY clause.
+
+
+
+
