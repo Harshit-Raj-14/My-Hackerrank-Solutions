@@ -5,14 +5,13 @@ CRUD (Create, Read, Update, and Delete)
 
 Query all attributes => Query all columns => SELECT * FROM db_name.table_name;
 
+You can rename a table or a column in a database temporarily by giving them another pseudo name. This pseudo name is known as Alias. 
+The use of aliases is to address a specific table or a column in an SQL statement without changing their original name in the database. Aliases are created with the AS keyword.
+
 
 /* NESTING SELECT QUERIES */
 SELECT ROUND(LONG_W,4) FROM STATION WHERE LAT_N=(SELECT MAX(LAT_N) FROM STATION WHERE  LAT_N<137.2345);
 //Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345. Round your answer to 4 decimal places.
-
-
-
-
 
 
 
@@ -102,6 +101,9 @@ SELECT SUBSTRING('Hello World', 2, 5) AS NEW_STRING;
 | ello       |
 +------------+
 
+/* SQL - CONCAT Function */
+Syntax: CONCAT(string1, string2, ...., string_n)
+SELECT CONCAT('SQL', ' ', 'is', ' ', 'fun!'); 
 
 
 
@@ -120,6 +122,116 @@ Syntax: REPLACE(string, old_string, new_string)
 SELECT REPLACE('SQL Tutorial', 'SQL', 'HTML'); 
 
 
+/* SQL - Group By Clause */
+to arrange identical data into groups
+SELECT AGE, COUNT(Name) FROM CUSTOMERS GROUP BY AGE;
+
+
+/* The SQL HAVING Clause */
+The SQL HAVING clause is similar to the WHERE clause; both are used to filter rows in a table based on specified criteria. 
+However, the HAVING clause is used to filter grouped rows instead of single rows. 
+These rows are grouped together by the GROUP BY clause, so, the HAVING clause must always be followed by the GROUP BY clause.
+
+Here's the order positioning:
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+
+SELECT ADDRESS, AGE, MIN(SALARY) AS MIN_SUM FROM CUSTOMERS GROUP BY ADDRESS, AGE HAVING AGE > 25;
+//we are grouping the records of the CUSTOMERS table based on the columns ADDRESS and AGE and filtering the groups where the AGE value is less than 25.
+
+
+
+/* SQL CASE Statement */
+The CASE statement works like a simplified IF-THEN-ELSE statement
+Syntax: 
+CASE
+   WHEN condition1 THEN statement1,
+   WHEN condition2 THEN statement2,
+   WHEN condition THEN statementN
+   ELSE result
+END;
+
+
+SELECT NAME, AGE,
+CASE 
+WHEN AGE > 30 THEN 'Gen X'
+WHEN AGE > 25 THEN 'Gen Y'
+WHEN AGE > 22 THEN 'Gen Z'
+ELSE 'Gen Alpha' 
+END AS Generation
+FROM CUSTOMERS;
+
+The output produced is as follows −
+NAME 	AGE 	Generation
+Ramesh 	32 	    Gen X
+Khilan 	25 	    Gen Z
+Hardik 	27 	    Gen Y
+Komal 	22 	    Gen Alpha
+
+/* SQL - BETWEEN Operator */
+SELECT * FROM CUSTOMERS WHERE AGE BETWEEN 20 AND 25;
+SELECT * FROM CUSTOMERS WHERE NAME BETWEEN 'A' AND 'L'; 
+
+
+
+/* The SQL UNION Operator */
+The SQL UNION operator is used to combine data from multiple tables by eliminating duplicate rows (if any).
+To use the UNION operator on multiple tables, all these tables must be union compatible. And they are said to be union compatible if and only if they meet the following criteria −
+    The same number of columns selected with the same datatype.
+    These columns must also be in the same order.
+    They need not have same number of rows.
+Syntax:
+SELECT column1 , column2
+FROM table1  
+[WHERE condition]
+UNION
+SELECT column1, column2 
+FROM table2
+[WHERE condition];
+
+SELECT ID, SALARY FROM CUSTOMERS WHERE ID > 5
+UNION
+SELECT CUSTOMER_ID, AMOUNT FROM ORDERS WHERE CUSTOMER_ID > 2;
+// In the following query, we are retrieving the id's of the customers where id is greater than 5 and 2 from the 'CUSTOMERS' and 'ORDERS' tables respectively 
+
+
+What is the difference Between UNION and UNION ALL?
+UNION ALL is also an operator/clause in SQL, that is used to combine multiple tables into one table. However, this operator also preserves the duplicate rows in the resultant tables unlike UNION.
+eg: As we can see in the tables above, Kohli played 234 matches internationally and 234 matches nationally. Even though the data in these columns is the same, they are all separate matches. 
+There is a need to include both rows in the resultant table displaying the total matches played by a player. So, we use the UNION ALL operator in such cases.
+Syntax: SELECT * FROM table1
+UNION ALL
+SELECT * FROM table2;
+
+Hence,
+UNION and UNION ALL are both SQL set operations that combine the result sets of two or more SELECT statements. However, there is a key difference between them:
+UNION:
+Removes duplicate rows from the combined result set.
+Only distinct (unique) rows are included in the final result.
+UNION ALL:
+Retains all rows from the combined result set, including duplicates.
+Does not eliminate duplicate rows, resulting in potentially faster performance compared to UNION.
+
+
+/* The SQL INTERSECT Operator */
+SELECT NAME, AGE, HOBBY FROM STUDENTS_HOBBY
+INTERSECT 
+SELECT NAME, AGE, HOBBY FROM STUDENTS;
+
+/* The SQL EXCEPT Operator */
+The EXCEPT operator in SQL is used to retrieve all the unique records from the left operand (query), except the records that are present in the result set of the right operand (query).
+Its opposite of intersect something like A-B.
+
+
+
+
+
+
+
 
 /* SQL CODE - FOR TYPE OF TRIANGLE */
 SELECT
@@ -136,3 +248,12 @@ FROM TRIANGLES;
 /* TOP EARNERS */
 SELECT MAX(SALARY * MONTHS), COUNT(NAME) FROM EMPLOYEE WHERE SALARY * MONTHS = (SELECT MAX(SALARY * MONTHS) FROM EMPLOYEE);
 //Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings.
+
+
+/* Give the output of full Name (Given First name and Surname) with some condition. */
+SELECT CONCAT(first_name, ' ', surname) AS full_name
+FROM users
+WHERE /* Your condition goes here */;
+
+/* remove duplicate rows from a table without a Distinct Keyword */
+
