@@ -227,6 +227,97 @@ The EXCEPT operator in SQL is used to retrieve all the unique records from the l
 Its opposite of intersect something like A-B.
 
 
+/* SQL JOIN */
+The SQL Join clause is used to combine data from two or more tables in a database.
+When the related data is stored across multiple tables, joins help you to retrieve records combining the fields from these tables using their foreign keys.
+Syntax:
+SELECT column_name(s)
+FROM table1
+JOIN table2;
+
+Example :
+SELECT ID, NAME, AGE, AMOUNT 
+FROM CUSTOMERS 
+JOIN ORDERS 
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+
+SQL - Inner Join
+The SQL Inner Join is a type of join that combines multiple tables by retrieving records that have matching values in both tables (in the common column).
+t compares each row of the first table with each row of the second table, to find all pairs of rows that satisfy the join-predicate. 
+When the join-predicate is satisfied, the column values from both tables are combined into a new table.
+The Inner Join is also referred as Equijoin. 
+It is the default join; i.e., even if the "Join"keyword is used instead of "Inner Join", tables are joined using matching records of common columns.
+SYNTAX:
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+Example:
+SELECT ID, NAME, DATE, AMOUNT FROM CUSTOMERS
+INNER JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID
+WHERE ORDERS.AMOUNT > 2000.00;
+
+You can also inner join multiple tables.
+
+
+
+Outer Join
+An Outer Join retrieves all the records in two tables even if there is no counterpart row of one table in another table, unlike Inner Join. 
+Outer Join is used to join multiple database tables into a combined result-set, that includes all the records, even if they don't satisfy the join condition. 
+NULL values are displayed against these records where the join condition is not met.
+Outer join is further divided into three subtypes - Left Join, Right Join and Full Join.
+Following are the different types of outer Joins −
+    LEFT JOIN − returns all rows from the left table, even if there are no matches in the right table.
+    RIGHT JOIN − returns all rows from the right table, even if there are no matches in the left table.
+    FULL JOIN − returns rows when there is a match in one of the tables.
+
+Other Joins
+In addition to these there are two more joins −
+SELF JOIN − is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.
+Self Join is a type of inner join, which is performed in cases where the comparison between two columns of a same table is required; probably to establish a relationship between them. 
+In other words, a table is joined with itself when it contains both Foreign Key and Primary Key in it.
+Unlike queries of other joins, we use WHERE clause to specify the condition for the table to combine with itself; instead of the ON clause.
+
+Syntax:
+SELECT column_name(s)
+FROM table1 a, table1 b
+WHERE a.common_field = b.common_field;
+
+SELECT  a.ID, b.NAME as EARNS_HIGHER, a.NAME 
+as EARNS_LESS, a.SALARY as LOWER_SALARY
+FROM CUSTOMERS a, CUSTOMERS b
+WHERE a.SALARY < b.SALARY
+ORDER BY a.SALARY;
+
+
+CROSS Join − returns the Cartesian product of the sets of records from the two or more joined tables. 
+That means, this join will combine each row of the first table with each row of second table (i.e. permutations).
+
+
+EXAMPLES:
+SELECT ID, NAME, DATE, AMOUNT FROM CUSTOMERS
+RIGHT JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID
+WHERE ORDERS.AMOUNT > 1000.00;
+
+
+
+
+The main difference between the Left Join and Right Join can be observed in the way tables are joined.
+They are both types of Outer Joins; that is, they retain unmatched rows in one table and discard the unmatched rows of another. 
+Left Join preserves the unmatched rows of left table while Right join preserves the unmatched rows of right table.
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -256,4 +347,16 @@ FROM users
 WHERE /* Your condition goes here */;
 
 /* remove duplicate rows from a table without a Distinct Keyword */
+//USING GROUP BY
+SELECT FirstName, LastName, MobileNo
+FROM  CUSTOMER
+GROUP BY FirstName, LastName, MobileNo;
+
+
+//USING INNER JOIN
+SELECT a.department_id
+FROM employees a
+INNER JOIN employees b ON a.department_id = b.department_id
+WHERE a.employee_id > b.employee_id;
+
 
