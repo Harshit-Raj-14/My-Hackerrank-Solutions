@@ -1,0 +1,50 @@
+1. STUDENT ADVISOR
+A university has started a student-advisor plan which assigns a professor as an advisor to each student for academic guidance. 
+Write a query to find the roll number and names of students who either have a male advisor with a salary of more than 15,000 or a female advisor with a salary of more than 20,000.
+There are two tables in the database: student_information and faculty_information. The primary key of student_information is roll_number whereas that of faculty_information is employee_ID.
+
+SOLUTION:
+SELECT 
+    student_information.roll_number, 
+    student_information.name
+FROM 
+    student_information
+INNER JOIN 
+    faculty_information
+ON 
+    student_information.advisor = faculty_information.employee_ID                    //////NOTE on this line don't do: student_information.roll_number = faculty_information.employee_ID (see reason)
+WHERE 
+    (faculty_information.gender = 'M' AND faculty_information.salary > 15000) OR 
+    (faculty_information.gender = 'F' AND faculty_information.salary > 20000);
+
+
+
+//REASON: even thogh student id is the primary key, we want our table to be joined by advisor id to get the results. So, joining is based on logic.
+
+
+
+2. PROFITABLE STOCKS
+A stock is considered profitable if the predicted price is strictly greater than the current price.
+Write a query to find the stock_codes of all the stocks which are profitable based on this definition. Sort the output in ascending order.
+There are two tables in the database: price_today and price_tomorrow. Their primary keys are stock_code.
+
+
+SOLUTION:
+SELECT price_today.stock_code as profit_stock
+FROM price_today
+INNER JOIN
+price_tomorrow
+ON price_today.stock_code = price_tomorrow.stock_code
+WHERE (price_tomorrow.price - price_today.price)>0
+ORDER BY profit_stock;
+
+
+
+THIS SOLUTION ALSO WORKS:
+SELECT price_today.stock_code as profit_stock
+FROM price_today
+INNER JOIN
+price_tomorrow
+ON price_today.stock_code = price_tomorrow.stock_code
+WHERE (price_tomorrow.price - price_today.price)>0
+ORDER BY price_today.stock_code;
