@@ -145,6 +145,22 @@ SELECT ADDRESS, AGE, MIN(SALARY) AS MIN_SUM FROM CUSTOMERS GROUP BY ADDRESS, AGE
 
 
 
+/* SQL Server ABS() Function */
+SELECT Abs(-243.5) AS AbsNum; 
+
+
+/* SQL Server SQUARE() Function */ => don't use this not a standard function, instead use POWER function
+SELECT SQUARE(64); 
+
+
+/* SQL Server SQRT() Function */
+SELECT SQRT(64); 
+
+/* SQL Server POWER() Function */
+SELECT POWER(4, 2); 
+//16
+
+
 /* SQL CASE Statement */
 The CASE statement works like a simplified IF-THEN-ELSE statement
 Syntax: 
