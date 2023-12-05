@@ -376,3 +376,11 @@ INNER JOIN employees b ON a.department_id = b.department_id
 WHERE a.employee_id > b.employee_id;
 
 
+
+/* FIND MODE */
+SELECT column_name, COUNT(column_name) AS frequency
+FROM table_name
+GROUP BY column_name
+ORDER BY frequency DESC
+LIMIT 1;
+
