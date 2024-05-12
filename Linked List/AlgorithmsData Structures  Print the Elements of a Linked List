@@ -1,0 +1,19 @@
+### PRINT LINKED LIST
+```
+    static void printLinkedList(SinglyLinkedListNode head) {
+        while(head!=null){
+            System.out.println(head.data+" ");
+            head=head.next;
+        }
+    }
+```
+OR - REDECLARING LINKED LIST
+```
+static void printLinkedList(SinglyLinkedListNode head) {
+        SinglyLinkedListNode current = head;
+        while (current != null) {
+            System.out.println(current.data + " ");
+            current = current.next;
+        }
+    }
+```
