@@ -58,10 +58,28 @@ static void printLinkedList(SinglyLinkedListNode head) {
 
 ### Insert a node at the head of a linked list
 ```
-    static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode headp, int data) {
+    static SinglyLinkedListNode insertNodeAtHead(SinglyLinkedListNode headp, int data) {    //headp -> pointer to the head node of a linked list
         SinglyLinkedListNode node = new SinglyLinkedListNode(data);
         node.next=headp;
         return node;
+    }
+```
+
+### Insert a node at a specific position in a linked list
+```
+    public static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode head, int data, int pos) {
+    SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+    if(pos==0){
+        newNode.next = head;
+        return newNode;
+    }
+    SinglyLinkedListNode curr = head;
+    for(int i=0;i<pos-1;i++){  //two position before pos
+        curr = curr.next;
+    }
+    newNode.next = curr.next;
+    curr.next = newNode;
+    return head;
     }
 ```
 
