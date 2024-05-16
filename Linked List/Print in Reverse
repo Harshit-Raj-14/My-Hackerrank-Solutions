@@ -1,0 +1,8 @@
+**USING TAIL RECURSION**
+```
+    public static void reversePrint(SinglyLinkedListNode head) {
+        if(head==null) return;    //base case
+        reversePrint(head.next);    //moving forward in linked list
+        System.out.println(head.data);    //calling back the print function after eachign end of tree stack
+    }
+```
