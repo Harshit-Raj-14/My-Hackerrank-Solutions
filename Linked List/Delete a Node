@@ -1,0 +1,10 @@
+    public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode head, int pos){
+        if(head == null) return null;  // Check if the list is empty
+        if(pos == 0) return head.next; // Deleting the head node
+        SinglyLinkedListNode curr = head;
+        for(int i=0;i<pos-1;i++){
+            curr=curr.next;
+        }
+        curr.next=curr.next.next;
+        return head;
+    }
