@@ -1,0 +1,91 @@
+**USING STACK O(n), O(N)**
+```
+    public static SinglyLinkedListNode reverse(SinglyLinkedListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        SinglyLinkedListNode curr = head;
+        while(curr!=null){
+            stack.push(curr.data);
+            curr=curr.next;
+        }
+        curr=head;  //reset curr to head
+        while(!stack.isEmpty()){
+            curr.data=stack.peek();
+            stack.pop();
+            curr=curr.next;
+        }
+        return head;
+    }
+```
+
+**TAIL RECURSION O(n), O(n)**
+```
+public static SinglyLinkedListNode reverse(SinglyLinkedListNode head) {
+    return solve(head, head, null);
+}
+
+public static SinglyLinkedListNode solve(SinglyLinkedListNode head, SinglyLinkedListNode curr, SinglyLinkedListNode prev) {
+    if (head == null) return head;
+    if (curr.next == null) {
+        head = curr;
+        curr.next = prev;
+        return head;
+    }
+    SinglyLinkedListNode temp = curr.next;
+    curr.next = prev;
+    return solve(head, temp, curr); // Capture return value and return it
+}
+```
+
+**USING RECURSION**
+```
+    public static SinglyLinkedListNode reverse(SinglyLinkedListNode head){
+        if(head==null || head.next==null) return head;
+        SinglyLinkedListNode secondpart = reverse(head.next); //reverse the rest list
+        head.next.next = head;  //put the first element at the end
+        head.next=null;
+        return secondpart;
+    }
+    
+    /*
+    LOGIC---
+    Divide the list in two parts – first node and rest of the linked list.
+    Call reverse for the rest of the linked list.
+    Link the rest linked list to first.
+    Fix head pointer to NULL
+
+SEE PIC - https://media.geeksforgeeks.org/wp-content/uploads/20240502111953/Reverse-a-Linked-List-Recursively.webp
+    */
+```
+
+**ITERATION O(n), O(1)**
+```
+    public static SinglyLinkedListNode reverse(SinglyLinkedListNode head){
+        SinglyLinkedListNode prev = null;
+        SinglyLinkedListNode curr = head;
+        SinglyLinkedListNode next = null;
+        while(curr!=null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+    
+    /*
+    Initialize three pointers prev as NULL, curr as head, and next as NULL.
+    Iterate through the linked list. In a loop, do the following:
+        Before changing the next of curr, store the next node 
+            next = curr -> next
+        Now update the next pointer of curr to the prev 
+            curr -> next = prev 
+        Update prev as curr and curr as next 
+            prev = curr 
+            curr = next     
+    */
+```
+
+
+
+
