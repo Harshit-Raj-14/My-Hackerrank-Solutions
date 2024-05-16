@@ -235,5 +235,31 @@ SEE PIC - https://media.geeksforgeeks.org/wp-content/uploads/20240502111953/Reve
 ```
 
 
-
+### Merge two sorted linked lists
+```
+static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2){
+        SinglyLinkedList ans = new SinglyLinkedList();
+        SinglyLinkedListNode curr1 = head1;
+        SinglyLinkedListNode curr2 = head2;
+        while(curr1!=null && curr2!=null){
+            if(curr1.data>=curr2.data){
+                ans.insertNode(curr2.data);
+                curr2=curr2.next;
+            }
+            else if(curr1.data<=curr2.data){
+                ans.insertNode(curr1.data);
+                curr1=curr1.next;
+            }
+        }
+        while(curr1!=null){
+            ans.insertNode(curr1.data);
+            curr1=curr1.next;
+        }
+        while(curr2!=null){
+            ans.insertNode(curr2.data);
+            curr2=curr2.next;
+        }
+        return ans.head;    //need to return the pointer of our ans ll -> refers to the head node of this singly linked list.
+}
+```
 
