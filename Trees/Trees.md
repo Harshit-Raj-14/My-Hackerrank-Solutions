@@ -174,6 +174,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
 ### Invert a tree or Mirror a tree
 ```
+/* USING QUEUE */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) return null;
@@ -192,6 +193,26 @@ class Solution {
 }
 ```
 The "node" is the whole space of memory the "node.val" is just the numeric value of the space of memory, if you are changing the "node" and not the value then you return the whole node and not the value.
+
+```
+/* Recursive Solution */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return root;
+        }
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+}
+```
+BOTH METHODS HAVE
+TC: O(n)
+SC: O(n)
 
 ### Check if a tree is a binary search tree
 ```
