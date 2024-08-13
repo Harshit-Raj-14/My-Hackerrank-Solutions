@@ -1,3 +1,9 @@
+GOOD QUESTIONS - https://www.simplilearn.com/top-sql-interview-questions-and-answers-article
+
+
+A database is a systematically organized collection of data arranged into tables composed of rows and columns. The primary purpose of databases is to efficiently store, manage, and retrieve data.
+
+
 In SQL, a **join** is used to combine rows from two or more tables based on a related column between them. Joins are a fundamental part of SQL queries and enable you to retrieve data that is spread across multiple tables. Here are the main types of joins:
 
 ### 1. Inner Join
