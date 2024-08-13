@@ -58,7 +58,7 @@ SELECT * FROM CUSTOMERS WHERE NAME LIKE 'K___%';    //WHERE Clause with LIKE Ope
 
 SELECT * FROM CUSTOMERS WHERE (AGE = 25 OR salary < 4500) AND (name = 'Komal' OR name = 'Kaushik');    //WHERE Clause with AND, OR Operators
 
-
+PATTERN MATCHING => Match words strign patterns => LIKE command
 
 /* SQL SUM() function */
 Syntax:
@@ -113,7 +113,7 @@ SELECT (COUNT(CITY) - COUNT(DISTINCT(CITY))) FROM STATION;  // difference betwee
 syntax - SELECT column_name FROM table_name ORDER BY table_name ASC/DSC;    //SQL ORDER BY clause is used to sort the data in either ascending or descending order
 
 Note: WHERE function if you are using any condition comes before order by.
-Logic--- firs tyou find the column data using condtion, then only you sort all of them
+Logic--- first you find the column data using condtion, then only you sort all of them
 
 /* SQL - MAX Function */
 Syntax: SELECT MAX(column_name) -> FROM table_name;
@@ -289,7 +289,7 @@ ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
 
 SQL - Inner Join
 The SQL Inner Join is a type of join that combines multiple tables by retrieving records that have matching values in both tables (in the common column).
-t compares each row of the first table with each row of the second table, to find all pairs of rows that satisfy the join-predicate. 
+compares each row of the first table with each row of the second table, to find all pairs of rows that satisfy the join-predicate. 
 When the join-predicate is satisfied, the column values from both tables are combined into a new table.
 The Inner Join is also referred as Equijoin. 
 It is the default join; i.e., even if the "Join"keyword is used instead of "Inner Join", tables are joined using matching records of common columns.
@@ -450,3 +450,13 @@ WHERE r = 6;
 
 // USING DATEDIFF
 SELECT DATEDIFF(year, '2017/08/25', '2011/08/25') AS DateDiff; 
+
+
+
+//CREATING TABLE
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(100) NOT NULL,
+    DateOfBirth DATE,
+    Email VARCHAR(255) UNIQUE
+);
