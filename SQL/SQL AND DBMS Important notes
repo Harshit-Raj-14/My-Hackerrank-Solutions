@@ -13,15 +13,30 @@ Query all attributes => Query all columns => SELECT * FROM db_name.table_name;
 You can rename a table or a column in a database temporarily by giving them another pseudo name. This pseudo name is known as Alias. 
 The use of aliases is to address a specific table or a column in an SQL statement without changing their original name in the database. Aliases are created with the AS keyword.
 
+two types of SQL queries: select and action queries. 
+The first ones are used to retrieve the necessary data (this also includes limiting, grouping, ordering the data, extracting the data from multiple tables, etc.), 
+while the second ones are used to create, add, delete, update, rename the data, etc.
+
 Types of SQL commands
 Data Definition Language (DDL) => CREATE, ALTER, DROP, TRUNCATE => applied to database objects like tables, views
 Data Manipulation Language (DML) => SELECT, INSERT, UPDATE, DELETE => applied to records in a table
 Data Control Language (DCL) => GRANT, REVOKE => access privilege to users
 Data Query Language (DQL) => SELECT
+Transaction Control Language (TCL) => COMMIT, SET TRANSACTION, ROLLBACK, and SAVEPOINT
 
 The SQL TRUNCATE TABLE command is used to empty a table.
 
 DROP command in SQL deletes entire database objects and their data, whereas the DELETE command removes specific rows from the table (specified by the WHERE clause).
+
+What is a constraint, and why use constraints?
+A set of conditions defining the type of data that can be input into each column of a table. Constraints ensure data integrity in a table and block undesired actions.
+
+What SQL constraints do you know?
+    DEFAULT – provides a default value for a column.
+    UNIQUE – allows only unique values.
+    NOT NULL – allows only non-null values.
+    PRIMARY KEY – allows only unique and strictly non-null values (NOT NULL and UNIQUE).
+    FOREIGN KEY – provides shared keys between two and more tables.
 
 
 /* NESTING SELECT QUERIES */
