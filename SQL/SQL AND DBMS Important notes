@@ -1,3 +1,8 @@
+SQL is a database query language designed for the retrieval and management of data in a relational databases like MySQL, MS Access, SQL Server, Oracle, Sybase, Informix, Postgres etc. 
+SQL stands for Structured Query Language. SQL was developed in the 1970s by IBM Computer Scientists.
+
+SQL is not a database management system, but it is a query language which is used to store and retrieve the data from a database or in simple words SQL is a language that communicates with databases.
+
 A file with . sql extension is a Structured Query Language (SQL) file.
 ACID -> 
 CRUD (Create, Read, Update, and Delete)
@@ -7,6 +12,16 @@ Query all attributes => Query all columns => SELECT * FROM db_name.table_name;
 
 You can rename a table or a column in a database temporarily by giving them another pseudo name. This pseudo name is known as Alias. 
 The use of aliases is to address a specific table or a column in an SQL statement without changing their original name in the database. Aliases are created with the AS keyword.
+
+Types of SQL commands
+Data Definition Language (DDL) => CREATE, ALTER, DROP, TRUNCATE => applied to database objects like tables, views
+Data Manipulation Language (DML) => SELECT, INSERT, UPDATE, DELETE => applied to records in a table
+Data Control Language (DCL) => GRANT, REVOKE => access privilege to users
+Data Query Language (DQL) => SELECT
+
+The SQL TRUNCATE TABLE command is used to empty a table.
+
+DROP command in SQL deletes entire database objects and their data, whereas the DELETE command removes specific rows from the table (specified by the WHERE clause).
 
 
 /* NESTING SELECT QUERIES */
@@ -384,3 +399,39 @@ GROUP BY column_name
 ORDER BY frequency DESC
 LIMIT 1;
 
+
+/* How to find Nth highest salary from a table? => retrieve the sixth highest salary from the Employee table */ 
+//USING LIMIT WAY 1
+select * from Employee ORDER BY salary DESC limit 5,1; 
+//LIMIT 5,1 means "skip the first 5 records and return the next one."
+
+//USING LIMIT WAY 2
+select * from ((select * from Employee 
+       ORDER BY `sal` DESC limit 6 ) AS T) 
+       ORDER BY T.`sal` ASC limit 1;
+
+//USING LIMIT WAY 3
+SELECT MIN(sal) FROM Employee WHERE sal IN (
+  SELECT DISTINCT sal
+  FROM Employee
+  ORDER BY sal DESC
+  LIMIT 6
+);
+
+//USING DENSE_RANK()
+Using DENSE_RANK
+SELECT * FROM (
+  SELECT emp_name, emp_salary, DENSE_RANK() OVER (ORDER BY emp_salary DESC) AS r
+  FROM emp
+) AS subquery
+WHERE r = 6;
+
+    DENSE_RANK computes the rank of a row in an ordered group of rows and returns the rank as a NUMBER. The ranks are consecutive integers beginning with 1.
+    This function accepts arguments as any numeric data type and returns NUMBER.
+    As an analytic function, DENSE_RANK computes the rank of each row returned from a query with respect to the other rows, based on the values of the value_exprs in the order_by_clause.
+    In the above query, the rank is returned based on the sal of the employee table. In the case of a tie, it assigns equal rank to all the rows.  
+
+
+
+// USING DATEDIFF
+SELECT DATEDIFF(year, '2017/08/25', '2011/08/25') AS DateDiff; 
