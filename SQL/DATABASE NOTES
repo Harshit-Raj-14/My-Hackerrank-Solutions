@@ -1,0 +1,59 @@
+Normalization is typically achieved through a series of stages known as "normal forms," each with its own rules and objectives. Here's an overview of the first three normal forms, which are the most commonly used:
+First Normal Form (1NF)
+
+    Objective: Ensure that each column in a table contains atomic, indivisible values, and each column contains values of a single data type.
+    Rules:
+        Each table cell must contain a single value (no repeating groups or arrays).
+        Each record must be unique, which is typically enforced by a primary key.
+
+Second Normal Form (2NF)
+
+    Objective: Remove partial dependencies on a composite primary key.
+    Rules:
+        The table must be in 1NF.
+        All non-key attributes must be fully functionally dependent on the entire primary key (not just part of it).
+
+Third Normal Form (3NF)
+
+    Objective: Eliminate transitive dependencies to ensure that non-key attributes depend only on the primary key.
+    Rules:
+        The table must be in 2NF.
+        There should be no transitive dependency, meaning that non-key attributes should not depend on other non-key attributes.
+
+Benefits of Normalization
+
+    Reduces Data Redundancy: By storing each piece of data only once, normalization minimizes the chance of inconsistent data.
+    Improves Data Integrity: Enforcing data dependencies helps maintain accuracy and consistency.
+    Facilitates Data Maintenance: Updating or deleting data is more straightforward when it is stored in a structured manner.
+    Optimizes Storage: Reducing redundancy saves storage space.
+
+Example
+
+Consider a table storing student enrollment information:
+StudentID	StudentName	CourseID	CourseName	Instructor
+1	Alice	101	Math	Prof. Smith
+2	Bob	102	Science	Prof. Jones
+1	Alice	102	Science	Prof. Jones
+
+    1NF: Ensure each field contains only atomic values, and the table has a unique identifier.
+    2NF: Separate the table into two tables, one for students and one for courses, to remove partial dependencies.
+    3NF: Create an additional table for instructors to remove transitive dependencies between courses and instructors.
+
+After normalization:
+
+Students Table
+StudentID	StudentName
+1	Alice
+2	Bob
+
+Courses Table
+CourseID	CourseName	InstructorID
+101	Math	1
+102	Science	2
+
+Instructors Table
+InstructorID	InstructorName
+1	Prof. Smith
+2	Prof. Jones
+
+This structure reduces redundancy and makes the data easier to manage.
