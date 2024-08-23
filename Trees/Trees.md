@@ -1,4 +1,35 @@
+## Trees
+root(the top node), children, leaf node(nde with no children)
+ancestors -> parent, grandparent, and so on to a node are all its ancestors
+
+## Types of Trees
+* Full Binary Tree -> every node has 0 or 2 children.
+* Complete binary Tree -> all levels are completely filled except the last level -> also the last level needs to have all nodes to the left, and not a misisng node in between and then on right
+* Perfect Binary Tree -> all leaf nodes are at same level
+* Balanced Binary Tree -> maximum  height of tree is log(n)
+* Degenerate Tree -> every node has a single children (skewed) (~also can be called a linked list)
+
 ### DECLARING TREES
+The root node has an integer value stored, with two more values stored as left pointer and right pointer. Which iwll further point to left and right child. And so on... 
+If it needs to stop it will point to null.
+```
+class Node{
+  int data;
+  Node left;
+  Node right;
+
+  public Node(key){	//constructor
+    data=key;
+}
+
+main(){
+  Node root = new Node(1);	//1 is created, witht wo refrences(pointer) left and right
+  root.left = new Node(2);	//2 is stored at the place where root's left poitner points
+  root.right = new Node(3);	//3 is stored at the place where root's right pointe points
+  root.right.left = new Node(5);
+}
+```
+
 ```
 /**
  * Definition for a binary tree node.
