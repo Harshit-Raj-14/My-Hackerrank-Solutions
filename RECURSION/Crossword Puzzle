@@ -1,0 +1,33 @@
+import java.util.*;
+public class Main{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        char crossword[][] = new char[10][10];
+        //ArrayList<String> words = new ArrayList<>();
+        for(int i=0;i<10;i++){
+            String s = sc.next();
+            for(int j=0;j<10;j++){
+                crossword[i][j] = s.charAt(j);
+            }
+        }
+        sc.nextLine(); // consume the remaining newline
+        String words[] = sc.nextLine().split(";");
+        printCrossword(crossword);
+        printWords(words);
+    }
+    
+    public static void printCrossword(char[][] crossword) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(crossword[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printWords(String[] words) {
+        for (String word : words) {
+            System.out.println(word);
+        }
+    }
+}

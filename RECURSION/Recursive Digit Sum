@@ -1,0 +1,32 @@
+/* RECURSION */
+public static int superDigit(String n, int k){
+    // Calculate the initial sum of digits in the string n
+    long sum = 0;
+    for (int i = 0; i < n.length(); i++) {
+        sum += n.charAt(i) - '0';
+    }
+    // Multiply the sum by k
+    sum *= k;
+    // Calculate the super digit
+    return solve(sum);
+}
+    
+public static int solve(long num){
+    // If the number is a single digit, return it
+    if (num < 10) return (int) num;
+    // Calculate the sum of digits of the number
+    long sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+// Recursively call superDigit on the sum of digits
+return solve(sum);
+}
+
+
+/*
+ * LOGIC---
+ * Rememeber, don't iterate as a string in solve. Rather use nums and fidn alst digits as its O(logn).
+ * Iterating in string form and then calculating sum each time would have cost us O(n).
+ */

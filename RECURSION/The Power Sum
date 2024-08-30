@@ -1,0 +1,75 @@
+/* USING RECURSION */
+class Result {
+    public static int powerSum(int x, int n) {
+        return recursion(x, 1, n);
+    }
+    
+    public static int recursion(int x, int i, int n){   //i is the start here
+        if(x==0) return 1;  //we are able to make x
+        if(x<0 || Math.pow(i,n)>x) return 0;   //we failed to make x and further not possible possible
+        int ways=0;
+        int taken = recursion(x-(int)Math.pow(i,n), i+1, n);
+        int not_taken = recursion(x, i+1, n);
+        ways = taken + not_taken;
+        return ways;
+    }
+}
+
+/*
+LOGIC---
+We just need to identify from i=1 till upto which vlaues of n we can have possibility to make sumx.
+And use the take and not_take logic.
+
+Time Complexity=O(2^x^1/n)
+*/
+
+/* USING MEMOISATION - WITH A HASHMAP */
+public static int powerSum(int x, int n) {
+    Map<String, Integer> memo = new HashMap<>();
+    return recursion(x, 1, n, memo);
+}
+
+public static int recursion(int x, int i, int n, Map<String, Integer> memo){   
+    // Create a key for the memo table
+    String key = x + "," + i;
+    if (memo.containsKey(key)) return memo.get(key);    //check if already computed
+    if(x==0) return 1;  //we are able to make x
+    if(x<0 || Math.pow(i,n)>x) return 0;   //we failed to make x and further not possible possible
+    int ways=0;
+    int taken = recursion(x-(int)Math.pow(i,n), i+1, n, memo);
+    int not_taken = recursion(x, i+1, n, memo);
+    ways = taken + not_taken;
+    memo.put(key, ways);
+    return ways;
+}
+
+/*
+ * TC - O(x^2)
+*/
+
+
+/* USING MEMOISATION - WITH A MATRIX */
+public static int powerSum(int x, int n) {
+    int[][] memo = new int[x + 1][x + 1];
+    for (int i = 0; i <= x; i++) {
+        for (int j = 0; j <= x; j++) {
+            memo[i][j] = -1;
+        }
+    }
+    return recursion(x, 1, n, memo);
+}
+
+public static int recursion(int x, int i, int n, int[][] memo){   
+    if(x==0) return 1;  //we are able to make x
+    if(x<0 || Math.pow(i,n)>x) return 0;   //we failed to make x and further not possible possible
+    if (memo[x][i] != -1) return memo[x][i];
+    int taken = recursion(x-(int)Math.pow(i,n), i+1, n, memo);
+    int not_taken = recursion(x, i+1, n, memo);
+    memo[x][i] = taken + not_taken;
+    return memo[x][i];
+}
+
+
+/*
+ * TC - O(x^2)
+*/

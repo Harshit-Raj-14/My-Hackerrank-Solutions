@@ -1,0 +1,92 @@
+/* MEMOISATION */
+public static String abbreviation(String a, String b) {
+    Map<String, Boolean> memo = new HashMap<>();
+    if (solve(a, b, 0, 0, memo)) return "YES";
+    else return "NO";
+}
+
+public static boolean solve(String a, String b, int i, int j, Map<String, Boolean> memo) {
+    String key = i + "," + j;
+    if (memo.containsKey(key)) return memo.get(key);
+    // If we've matched the whole string 'b'
+    if (j == b.length()) {
+        while (i < a.length()) {
+            if (Character.isUpperCase(a.charAt(i))) {
+                memo.put(key, false);
+                return false;
+            }
+            i++;
+        }
+        memo.put(key, true);
+        return true;
+    }
+    // If we've reached the end of 'a' without fully matching 'b'
+    if (i >= a.length() || j >= b.length()) {
+        memo.put(key, false);
+        return false;
+    }
+    char charA = a.charAt(i);
+    char charB = b.charAt(j);
+    boolean result = false;
+    // If charA matches charB (both uppercase), move to the next character in both strings
+    if (charA == charB) result = solve(a, b, i + 1, j + 1, memo);
+    else if (Character.isLowerCase(charA)) {
+        // If charA is lowercase, we have two options:
+        // 1. Skip the lowercase character
+        result = solve(a, b, i + 1, j, memo);
+        // 2. Convert it to uppercase and try to match it with charB
+        if (!result && Character.toUpperCase(charA) == charB) {
+            result = solve(a, b, i + 1, j + 1, memo);
+        }
+    }
+    memo.put(key, result);
+    return result;
+}
+    
+    
+    /* RECURSION TLE */
+public static String abbreviation(String a, String b){
+    if (solve(a, b, 0, 0)) return "YES";
+    else return "NO";
+}
+
+public static boolean solve(String a, String b, int i, int j) {
+    // If we've matched the whole string 'b'
+    if (j == b.length()) {
+        // Check if the remaining characters in 'a' are all lowercase
+        while (i < a.length()) {
+            if (Character.isUpperCase(a.charAt(i))) return false;
+            i++;
+        }
+        return true;
+    }
+    // If we've reached the end of 'a' without fully matching 'b'
+    if (i >= a.length() || j>=b.length()) return false;
+    char charA = a.charAt(i);
+    char charB = b.charAt(j);
+    // If charA matches charB (both uppercase), move to the next character in both strings
+    if (charA == charB) return solve(a, b, i + 1, j + 1);
+    // If charA is lowercase, we have two options:
+    if (Character.isLowerCase(charA)) {
+        // 1. Skip the lowercase character
+        if (solve(a, b, i + 1, j)) return true;
+        // 2. Convert it to uppercase and try to match it with charB
+        if (Character.toUpperCase(charA) == charB) {
+            return solve(a, b, i + 1, j + 1);
+        }
+    } 
+    //If charA is uppercase and doesn't match charB, or we exhausted options, return false
+    return false;
+}
+
+/*
+LOGIC---
+We need to apply operation to make string a equal to b. And tell whether its possible or not. String b contains only uppercase letter.
+
+Operations:
+We have a free hand to convert any small letter into a uppercase.
+And then delete all the remaining smaller letters.
+
+So, we have two choices in string a, either we capitalsie it or we remove it.
+So, let's try making a string temp(sb) from aby applying operations and see whther we can get it to be equal to b.
+*/
