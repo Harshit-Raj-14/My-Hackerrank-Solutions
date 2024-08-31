@@ -1,0 +1,29 @@
+/* MEMOISATION TLE */
+    public static long getWays(long n, List<Long> arr){
+        long dp[][] = new long[arr.size()+1][(int)n+1];
+        for(long row[]:dp) Arrays.fill(row, -1);
+        return solve(n, arr,0, dp);
+    }
+    
+    public static long solve(long n, List<Long> arr, int idx, long dp[][]){
+        if(n==0) return 1;
+        if(n<0 || idx>=arr.size()) return 0;
+        if(dp[idx][(int)n]!=-1) return dp[idx][(int)n];
+        long not_take=solve(n,arr,idx+1, dp);
+        long take = solve(n-arr.get(idx),arr,idx, dp);
+        return dp[idx][(int)n]=take+not_take;
+    }
+
+
+/* RECURSION TLE */
+    public static long getWays(long n, List<Long> arr){
+        return solve(n, arr,0);
+    }
+    
+    public static long solve(long n, List<Long> arr, int idx){
+        if(n==0) return 1;
+        if(n<0 || idx>=arr.size()) return 0;
+        long not_take=solve(n,arr,idx+1);
+        long take = solve(n-arr.get(idx),arr,idx);
+        return take+not_take;
+    }
