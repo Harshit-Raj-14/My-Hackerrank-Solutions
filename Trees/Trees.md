@@ -1,16 +1,25 @@
 ## Trees
-root(the top node), children, leaf node(nde with no children)
+root(the top node), children, leaf node(node with no children)
 ancestors -> parent, grandparent, and so on to a node are all its ancestors
 
 ## Types of Trees
 * Full Binary Tree -> every node has 0 or 2 children.
-* Complete binary Tree -> all levels are completely filled except the last level -> also the last level needs to have all nodes to the left, and not a misisng node in between and then on right
+* Complete binary Tree -> all levels are completely filled except the last level -> also the last level needs to have all nodes to the left, and not a missing node in between and then on right
 * Perfect Binary Tree -> all leaf nodes are at same level
 * Balanced Binary Tree -> maximum  height of tree is log(n)
 * Degenerate Tree -> every node has a single children (skewed) (~also can be called a linked list)
 
+### levels in trees
+Root is at level 0, thne next row will be level 1 and so on.
+These levles also help us to define depth of a node. so, if level of a node is 1 => its depth is also 1.
+Infact depth is the distance between the node and the root.
+Height of binary tree -> the ditance between the root and deepest node. So, it will be equal to the level of deepest node.
+Degree of a node -> number of children nodes it is connected to. Hnece degree of a leaf node is 0.
+
+
+
 ### DECLARING TREES
-The root node has an integer value stored, with two more values stored as left pointer and right pointer. Which iwll further point to left and right child. And so on... 
+The root node has an integer value stored, with two more values stored as left pointer and right pointer. Which will further point to left and right child. And so on... 
 If it needs to stop it will point to null.
 ```
 class Node{
@@ -56,8 +65,8 @@ main(){
 Remember :
 * Depth First Search or DFS:-
   * Preorder Traversal : Root | Left | Right
-	* Postorder Traversal: Left-Right-Root
-	* Inorder Traversal: Left-Root-Right
+  * Postorder Traversal: Left-Right-Root
+  * Inorder Traversal: Left-Root-Right
 
 * Level Order Traversal or Breadth First Search or BFS
 
@@ -326,7 +335,7 @@ Right subtree of this node is identical to the right subtree of the correspondin
 public class Solution {
     public boolean isIdentical(Node node1, Node node2) {
         if (node1 == null && node2 == null) return true;  //If both nodes are NULL, they are identical
-        if (node1 == null || node2 == null) return false;
+        if ((node1==null && node2!=null) || (node1!=null && node2 == null)) return false;
         // Check if the current nodes have the same data value and recursively check their left and right subtrees
         return ((node1.data == node2.data)
                 && isIdentical(node1.left, node2.left)
@@ -337,21 +346,28 @@ public class Solution {
 ### Symmetric binary tree
 ```
 class Solution {
-    public boolean isSymmetric(Node root) {
-        if (root == null) {return true;    //an empty tree would be considered symmetric
-        // Call the utility function to check symmetry of subtrees left and right
-        return isSymmetricUtil(root.left, root.right);
-    }
+    public boolean isSymmetric(TreeNode root) {
+        return isSameTree(root.left, root.right);
+    }
 
-    private boolean isSymmetricUtil(Node root1, Node root2) {
-        if (root1 == null || root2 == null){     //Check if either subtree is null If one subtree is null, the other must also be null for symmetry
-            return root1 == root2;
-        }
-        // Check if the data in the current nodes is equal and recursively check for symmetry in subtrees
-        return (root1.data == root2.data)
-                && isSymmetricUtil(root1.left, root2.right)
-                && isSymmetricUtil(root1.right, root2.left);
+    public boolean isSameTree(TreeNode p, TreeNode q){
+        if(p==null && q==null) return true;
+        else if((p!=null && q==null) || (p==null && q!=null)) return false;
+        return (p.val==q.val && isSameTree(p.left, q.right) && isSameTree(p.right, q.left));
     }
 }
+
+/*
+LOGIC---
+Symmetric binary tree is checking like the two halves of trees are same or not.
+So, we think of the two halves as two seperate trees divided in half. 
+If these two divided trees are same they are symmetric.
+
+But just a small differnece, becuase we are checking for mirror => the nodes will be laterally inverted.
+So, left will become right and right will become left.
+Meaning, left subtree's right node should be same as right subtree's left node.
+
+Recursive conditon will be - isSameTree(p.left, q.right) && isSameTree(p.right, q.left)
+*/
 ```
 
