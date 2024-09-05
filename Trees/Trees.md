@@ -9,6 +9,11 @@ ancestors -> parent, grandparent, and so on to a node are all its ancestors
 * Balanced Binary Tree -> maximum  height of tree is log(n)
 * Degenerate Tree -> every node has a single children (skewed) (~also can be called a linked list)
 
+## Binary Search Tree
+A tree in which all the elements in left subtree (child nodes in left) is less than the parent node, and all the elements in right subtree (child nodes in the right) are greater than the parent node. This condition will exist through each and every node.
+This was done to make searching easier.
+
+
 ### levels in trees
 Root is at level 0, thne next row will be level 1 and so on.
 These levles also help us to define depth of a node. so, if level of a node is 1 => its depth is also 1.
@@ -117,7 +122,41 @@ class Solution {
 }
 ```
 
+### Level Order Traversal
+```
+class Solution{
+    static ArrayList <Integer> levelOrder(Node root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node curr = queue.poll();
+            if(curr!=null){
+                list.add(curr.data);
+                queue.add(curr.left);
+                queue.add(curr.right);
+            }
+        }
+        return list;
+    }
+}
 
+/*
+LOGIC---
+Level Order traversal-> BFS
+We are takign a element and processing it in same order.
+First level then enxt level and so on.
+And each level is traversed from left to right.
+
+Since we need a specific order, we use Queue -> first in-first out.
+So, let's take advantage of this fact.
+
+APPROACH---
+Put the root node in queue.
+When you pop the node now, push the right and left child in queue.
+Repeat the process.
+*/
+```
 
 ### Insert a Node at the Tail of a Linked List - ITERATION
 ```
