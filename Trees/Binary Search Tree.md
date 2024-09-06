@@ -58,4 +58,32 @@ Return the root node.
 
 */
 ```
+
+### 938. Range Sum of BST
+Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+```
+class Solution {
+    public int rangeSumBST(TreeNode root, int l, int r) {
+        return solve(root, l, r);
+    }
+
+    public static int solve(TreeNode curr, int l, int r){
+        if(curr==null) return 0;    // Base case: if the node is null, return 0
+        int ans=0;
+        // Add the value of the current node if it's within the range
+        if(curr.val>=l && curr.val<=r) ans+= curr.val;
+        // Traverse left subtree if the current node's value is greater than l
+        if(curr.val>l) ans+= solve(curr.left, l, r);
+        // Traverse right subtree if the current node's value is less than r
+        if(curr.val<r) ans+= solve(curr.right, l, r);
+        return ans;
+    }
+}
+
+/*
+LOGIC---
+Travel through BST according to the given range conditions.
+TC-O(n), SC-O(n)
+*/
+```
 ## Delete a node from Binary Search Tree / Binary Tree
