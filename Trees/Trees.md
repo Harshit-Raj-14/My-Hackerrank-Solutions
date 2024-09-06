@@ -133,8 +133,8 @@ class Solution{
             Node curr = queue.poll();
             if(curr!=null){
                 list.add(curr.data);
-                queue.add(curr.left);
-                queue.add(curr.right);
+                if(curr.left!=null) queue.add(curr.left);
+		if(curr.right!=null) queue.add(curr.right);
             }
         }
         return list;
