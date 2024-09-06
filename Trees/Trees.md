@@ -182,19 +182,41 @@ public static int height(Node root) {
         return Math.max(height(root.left), height(root.right)) + 1;
 }
 ```
+**MII - Using QUEUE  => IN-ORDER =>Iterative Approach**
+```
+public static int height(Node root){
+    Queue<Node> queue = new LinkedList<>();
+    queue.add(root);
+    int levels=0;   //number of levels in tree
+    while(!queue.isEmpty()){
+        int nodecountatlevel = queue.size();
+        while(nodecountatlevel>0){
+                Node curr = queue.poll();
+                if(curr.left!=null) queue.add(curr.left);
+                if(curr.right!=null) queue.add(curr.right);
+                nodecountatlevel--;
+        }
+        levels++;
+    }
+    return levels-1;
+}
+/*
+LOGIC---
+Height of binary tree = levels in a binary tree
+TC-O(n), SC-O(n)
+We have optimised space by using one queue. While the recurison would use two stack space
+*/
+```
 
-### Depth of a Binary Tree
+### Depth of a Binary Tree || same as height of a binary tree
 A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 ```
 class Solution {
     public int maxDepth(TreeNode root) {
         if(root==null) return 0;
-        else{
-            int ldepth = maxDepth(root.left);
-            int rdepth = maxDepth(root.right);
-            System.out.println(ldepth);
-            return Math.max(ldepth, rdepth) + 1;
-        }
+        int depth_l = maxDepth(root.left)+1;
+        int depth_r = maxDepth(root.right)+1;
+        return Math.max(depth_l, depth_r);
     }
 }
 ```
