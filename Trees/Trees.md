@@ -57,3 +57,51 @@ LOGIC---
 Travel through BST according to the given range conditions.
 */
 ```
+
+
+### 111. Minimum Depth of Binary Tree
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+Note: A leaf is a node with no children.
+```
+/* ITERATIVE SOLUTION */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int level=1;
+        while(!queue.isEmpty()){
+            int nodesatlevel=queue.size();
+            while(nodesatlevel-->0){
+                TreeNode curr = queue.poll();
+                if(curr.left==null && curr.right==null) return level;   //a leaf node
+                if(curr.left!=null) queue.add(curr.left);
+                if(curr.right!=null) queue.add(curr.right);
+            }
+            level++;
+        }
+        return 0;
+    }
+}
+
+/*
+LOGIC---
+Minimum depth = topmost node with no children
+In recursion we were goign through all nodes, but in fact if we move level wise we can encounter the first leaf node
+and won't need to check the lower part of tree. this makes it efficient.
+*/
+```
+
+```
+/* RECURSION */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null) return 0;
+        if(root.left==null) return 1+minDepth(root.right);
+        if(root.right==null) return 1+minDepth(root.left);
+        int lheight = 1 + minDepth(root.left);
+        int rheight = 1 + minDepth(root.right);
+        return Math.min(lheight, rheight);
+    }
+}
+```
