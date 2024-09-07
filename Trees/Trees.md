@@ -105,3 +105,43 @@ class Solution {
     }
 }
 ```
+
+
+### 1367. Linked List in Binary Tree
+Given a binary tree root and a linked list with head as the first node. 
+Return True if all the elements in the linked list starting from the head correspond to some downward path connected in the binary tree otherwise return False.
+
+```
+class Solution {
+    public boolean isSubPath(ListNode head, TreeNode root){
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(queue.size()!=0){
+            int nodesatlevel=queue.size();
+            while(nodesatlevel-->0){
+                TreeNode curr = queue.poll();
+                if(curr.val==head.val){ //if the first value match check whether this can form a downward path
+                    if(isDownward(head, curr)) return true;
+                }
+                if(curr.left!=null) queue.add(curr.left);
+                if(curr.right!=null) queue.add(curr.right);
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDownward(ListNode head, TreeNode curr){
+        // Base cases
+        if (head == null) return true; //we reached the end of the linked list, means the entire path matched
+        if (curr == null) return false; //binary tree ended before we could match the linked list
+        if (head.val != curr.val) return false;
+        // Recurse to the left and right subtrees, as eithe rof them can be our downward path from there on
+        return isDownward(head.next, curr.left) || isDownward(head.next, curr.right);
+    }
+}
+
+/*
+LOGIC---
+Iteratively move through the tree and check whether from a first matching node can you find a downward path while together moving with the linkedlinst.
+*/
+```
