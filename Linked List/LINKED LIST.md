@@ -282,7 +282,7 @@ class Solution {
         curr=head;
         ListNode temp = null;
         for(int i=0;i<k && curr!=null;i++){   //looping over k partitions
-            ans[i]=curr;
+            ans[i]=curr;    //putting the curr as head
             int extra=0;
             if(extras>0) extra=1;
             for(int count=1;count<=part+extra;count++){
@@ -295,4 +295,13 @@ class Solution {
         return ans;
     }
 }
+
+/*
+TC - O(k*(L/k) + x) == O(k + L) => where k is no of partiitons and l is size of linked list, x is extra nodes
+
+Reason - each node is visited only once while forming k partitions
+
+*/
 ```
+
+
