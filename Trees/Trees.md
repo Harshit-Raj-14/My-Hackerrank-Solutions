@@ -112,6 +112,7 @@ Given a binary tree root and a linked list with head as the first node.
 Return True if all the elements in the linked list starting from the head correspond to some downward path connected in the binary tree otherwise return False.
 
 ```
+/* ITERATIVE SOLUTION O(n*m), O(n+m) */
 class Solution {
     public boolean isSubPath(ListNode head, TreeNode root){
         Queue<TreeNode> queue = new LinkedList<>();
@@ -143,5 +144,61 @@ class Solution {
 /*
 LOGIC---
 Iteratively move through the tree and check whether from a first matching node can you find a downward path while together moving with the linkedlinst.
+*/
+```
+
+```
+/* RECURSIVE SOLUTION O(n*m), O(n+m) */
+class Solution {
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if(root==null) return false;
+        //make a recursive check for head and root; make a recursive call of sub path for left and right path to traverse both paths
+        return check(head, root) || isSubPath(head, root.left) || isSubPath(head, root.right);  
+    }
+
+    public boolean check(ListNode head, TreeNode root){
+        if(head==null) return true; //covered entire linked list
+        if(root==null) return false;
+        if(head.val!=root.val) return false;
+        return check(head.next, root.left) || check(head.next, root.right); //any of the subtrees could have our path
+    }
+}
+```
+
+## 501. Find Mode in Binary Search Tree
+Given the root of a binary search tree (BST) with duplicates, return all the mode(s) (i.e., the most frequently occurred element) in it.
+```
+/* Count Frequency With Hash Map O(n), O(n) */
+class Solution {
+    public int[] findMode(TreeNode root) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int maxfreq=0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(queue.size()!=0){
+            int nodeatlevel=queue.size();
+            while(nodeatlevel-->0){
+                TreeNode curr = queue.poll();
+                map.put(curr.val, map.getOrDefault(curr.val,0)+1);
+                maxfreq=Math.max(maxfreq, map.get(curr.val));
+                if(curr.left!=null) queue.add(curr.left);
+                if(curr.right!=null) queue.add(curr.right);
+            }
+        }
+        ArrayList<Integer> list = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if(entry.getValue()==maxfreq) list.add(entry.getKey());
+        }
+        int ans[] = new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            ans[i]=list.get(i);
+        }
+        return ans;
+    }
+}
+
+/*
+LOGIC---
+Find frequency of all node elements and get the maxelement frequency.
 */
 ```
