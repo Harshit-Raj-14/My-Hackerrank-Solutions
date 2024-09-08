@@ -263,3 +263,36 @@ static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedL
 }
 ```
 
+
+## 725. Split Linked List in Parts
+Given the head of a singly linked list and an integer k, split the linked list into k consecutive linked list parts.
+```
+class Solution {
+    public ListNode[] splitListToParts(ListNode head, int k){
+        //Step!: find length of linked list
+        ListNode curr = head;
+        int len=0;
+        while(curr!=null){
+            len++;
+            curr=curr.next;
+        }
+        int part = len/k;
+        int extras = len%k;  //this extra will be added one by one in the first partitions as per condition
+        ListNode ans[] = new ListNode[k];
+        curr=head;
+        ListNode temp = null;
+        for(int i=0;i<k && curr!=null;i++){   //looping over k partitions
+            ans[i]=curr;
+            int extra=0;
+            if(extras>0) extra=1;
+            for(int count=1;count<=part+extra;count++){
+                temp=curr;
+                curr=curr.next; //while curr has moved forward temp will cover the elements needed
+            }
+            if(temp!=null) temp.next=null;  //partition it now for array
+            extras--;   //one extra node used
+        }
+        return ans;
+    }
+}
+```
