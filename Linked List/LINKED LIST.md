@@ -305,3 +305,27 @@ Reason - each node is visited only once while forming k partitions
 ```
 
 
+### 3217. Delete Nodes From Linked List Present in Array
+You are given an array of integers nums and the head of a linked list. Return the head of the modified linked list after removing all nodes from the linked list that have a value that exists in nums.
+```
+class Solution {
+    public ListNode modifiedList(int[] arr, ListNode head) {
+        HashSet<Integer> set = new HashSet<>(); //all elements in arr are unique
+        for(int i=0;i<arr.length;i++) set.add(arr[i]);
+        ListNode dummy = new ListNode(); // create a dummy node that will start next from head
+        dummy.next = head;
+        ListNode curr = dummy;
+        while(curr.next!=null){
+            if(set.contains(curr.next.val)){
+                while(curr.next!=null && set.contains(curr.next.val)){
+                    curr.next=curr.next.next;
+                }
+            }
+            else curr=curr.next;
+        }
+        return dummy.next;
+    }
+}
+```
+
+
