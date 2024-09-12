@@ -22,7 +22,7 @@ while(fast!=null && fast.next!=null){  //fast is traversing twice so check it do
 ```
 
 ## Linked-List Reversal
-The head of linked list becomes tail and all pointers are reversed.
+The head of linked list becomes tail and all pointers are reversed. => teer piche marne wali technique.
 We require three pointers for this.
 ```
 Node prev=null;
