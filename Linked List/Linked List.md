@@ -24,6 +24,7 @@ while(fast!=null && fast.next!=null){  //fast is traversing twice so check it do
 ## Linked-List Reversal
 The head of linked list becomes tail and all pointers are reversed. => teer piche marne wali technique.
 We require three pointers for this.
+For visalisation you can see this - https://leetcode.com/problems/reverse-linked-list/solutions/5612752/step-by-step-explained-with-images-easiest-to-understand-java-c-python-javascript-go-codes/
 ```
 Node prev=null;
 Node curr = head;
