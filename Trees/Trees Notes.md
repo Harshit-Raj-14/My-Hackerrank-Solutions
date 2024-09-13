@@ -274,6 +274,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 ```
 
 ### Invert a tree or Mirror a tree
+LOGIC--- For each and every node just swap the left and right subtree or nodes => you get your mirror tree
 ```
 /* USING QUEUE */
 class Solution {
