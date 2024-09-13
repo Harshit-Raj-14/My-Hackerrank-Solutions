@@ -201,3 +201,20 @@ Using temp:
     Without temp, we wouldn't know how to reconnect the last node in the reversed section.    
 */
 ```
+
+### 83. Remove Duplicates from Sorted List
+```
+class Solution {
+    public ListNode deleteDuplicates(ListNode head){
+        if (head == null) return null; 
+        ListNode curr = head;
+        while(curr!=null && curr.next!=null){
+            if(curr.val==curr.next.val){    //skip duplicate nodes
+                curr.next=curr.next.next;
+            }
+            else curr=curr.next;
+        }
+        return head;
+    }
+}
+```
