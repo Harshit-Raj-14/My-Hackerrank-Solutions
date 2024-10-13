@@ -279,3 +279,18 @@ You iterate through the list once to add all nodes to the priority queue. This o
 SC - O(n)
 */
 ```
+
+
+## Delete Alternate Nodes
+```
+class Solution {
+    public void deleteAlt(Node head){
+        if(head==null) return;
+        Node curr = head;
+        while(curr!=null && curr.next!=null){
+            curr.next = curr.next.next; // Bypass the next node (delete the alternate node)
+            curr = curr.next; // Move to the next node
+        }
+    }
+}
+```
