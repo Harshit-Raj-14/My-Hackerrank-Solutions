@@ -285,3 +285,48 @@ LOGIC---
 Find frequency of all node elements and get the maxelement frequency.
 */
 ```
+
+## 129. Sum Root to Leaf Numbers
+For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123.
+Return the total sum of all root-to-leaf numbers
+```
+/* RECURSION O(n), O(n) */
+class Solution {
+    public int sumNumbers(TreeNode root){
+        ArrayList<String> list = new ArrayList<>();
+        solve(root, "", list);
+        int ans=0;
+        for(int i=0;i<list.size();i++){
+            ans+=Integer.parseInt(list.get(i));
+        }
+        return ans;
+    }
+
+    public static void solve(TreeNode root, String s, ArrayList<String> list){
+        if(root==null) return;
+        if(root.left==null && root.right==null){    //a leaf node
+            s+=root.val;    //adding the leaf node
+            list.add(s);
+            return;
+        }
+        solve(root.left, s+ root.val, list);
+        solve(root.right, s+ root.val, list);
+    }
+}
+
+/* DFS O(n), O(1) */
+class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        solve(root, 0);
+        return sum;
+    }
+
+    public void solve(TreeNode root, int num){
+        num = num * 10 + root.val;
+        if (root.left != null) solve(root.left, num);
+        if (root.right != null) solve(root.right, num);
+        if (root.left == null && root.right == null) sum += num;    //at leaf node we can make our sum
+    }
+}
+```
