@@ -1,0 +1,18 @@
+Nodes: A node, also known as a vertex or point, is a fundamental unit of a graph. In graph theory, nodes are treated as indivisible and featureless objects. 
+Edges : Relation, or line connected nodes
+Vertex = Nodes
+
+TLE session = https://www.youtube.com/watch?v=BQFvOBJCDXs (eg  :why graphs : manage or show replationship between facebook friends 
+
+Types of graphs:
+Directed Grpah (like a one way road, a hierarchy kind, directions matter)
+Undirected graph (like a 2 way road, where direction does not matter)
+
+Unweighted Graph
+
+
+Representation of graph
+G={V,E}
+                                                           
+
+ 
