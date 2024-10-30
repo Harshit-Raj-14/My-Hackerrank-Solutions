@@ -298,3 +298,41 @@ Return the topological order.
 
 SAME AS BFS
 The complexity of this algorithm is the same of BFS.
+
+
+
+## DIJKSTRA'S ALGORITHM 
+Dijkstra's algorithm is a greedy algorithm
+Shortest Path in Weighted Graph
+DFS
+
+/* CODE */
+public class DijkstraShortestPath {
+    public static int[] dijkstraShortestPath(WeightedGraph graph, int source) {
+      int[] distance = new int[graph.getVertices().length];    //to store all distances
+      Arrays.fill(distance, Integer.MAX_VALUE); // set all to infinity
+      PriorityQueue<GraphEdge> pq = new PriorityQueue<>((e1, e2) -> Integer.compare(e1.getWeight(), e2.getWeight()));  //min heap   
+      //PriorityQueue<GraphEdge> pq = new PriorityQueue<>(Comparator.comparingInt(GraphEdge::getWeight));
+      distance[source] = 0;
+      pq.add(new GraphEdge(source, source, 0));  //dummy graph edge of 0 source to source
+      while (!pq.isEmpty()) {
+        GraphEdge currentEdge = pq.poll();
+        int destination = currentEdge.getDestination();
+        for (GraphEdge edge : graph.getVertices()[destination]) {
+          int newDistance = distance[destination] + edge.getWeight();
+          if (newDistance < distance[edge.getDestination()]) {
+            distance[edge.getDestination()] = newDistance;
+            pq.add(new GraphEdge(edge.getSource(), edge.getDestination(), newDistance));
+          }
+        }
+      }
+      return distance;
+    }
+}
+
+TC - O(ElogV)
+SC - O(V)
+
+Note:
+A ->...-> B -> C ->....-> D
+To find the shortest path between A and D, it will always include the shortest path between BC
