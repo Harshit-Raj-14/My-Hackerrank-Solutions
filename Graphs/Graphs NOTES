@@ -121,7 +121,7 @@ CONS:
 - expensive operations, notsuitable for dynamic graphs
 
 
-ADJACENCY LIST (based on linked list)
+ADJACENCY LIST (based on ArrayList/ linked list)(vertex->graph, node->ll)
 Graph : 1--2--3--4
 
 Based on above graph we can draw seperate ll for each node showing which other node its connected to:
@@ -136,8 +136,165 @@ Directed Graph : Graph : 1--2--3--4->1 (directed edge back from 4 to 1)
 3 -> 2 -> 4
 4 -> 3
 
-Notice that for directed edge, in ll for node 1 we have an outgoing edge to 4
-But in ll of node 4 there is no edge connecting to 1
+Notice that for directed edge, in ll for vertex 1 we have an outgoing edge to 4
+But in ll of vertex 4 there is no edge connecting to 1
 So, that's how you represent directed graph
 
 For weighted graph, add an extra section of weight in ll node data
+
+Note : when adding a node in tree, you can add an extra ll of that vertex and every joining vertex that is added to that ll, you can add that extra vertex values to those ll's as well
+
+Degree of node -> size of ll
+
+/* CODE */
+public class AdjacencyListGraph {
+private Map<Integer, List<Integer>> adjacencyList;
+
+public AdjacencyListGraph(){  // Constructor
+  this.adjacencyList = new HashMap<>(); 
+}
+
+// Add a vertex to the graph
+public void addVertex(int vertex) {
+  adjacencyList.put(vertex, new LinkedList<>());
+}
+
+// Add an edge between two vertices
+public void addEdge(int source, int destination) {
+  adjacencyList.get(source).add(destination); 
+  adjacencyList.get(destination).add(source);
+}
+
+// Remove an edge between two vertices
+public void removeEdge (int source, int destination) {
+  adjacencyList.get(source).remove((Integer) destination);
+  adjacencyList.get(destination).remove((Integer) source);
+}
+
+// Add a vertex to the graph
+public void addVertex(int vertex) {    //O(1)
+  adjacencyList.put(vertex, new LinkedList<>());
+}
+
+// Remove a vertex from the graph
+private void removeVertex(int vertex) {
+  adjacencyList.remove(vertex);
+  // Remove edges pointing to the removed vertex
+  for (List<Integer> neighbors : adjacencyList.values()){ 
+    neighbors.remove((Integer) vertex);
+  }
+}
+
+public static void main(String args[]){
+  G = new AdjacencyListGraph(4);
+  G.addVertex(1);
+  G.addVertex(2);
+  G.addVertex(3);
+  addEdge (1 2);
+  addEdge (1, 3);
+  addEdge (2 , 3);
+  removeEdge(3, 1);
+  addVertex(5);
+}
+
+PROS-
+- Unlike adjacency matrix where adding and removing vertex were O(n^2) operation, here its just O(1)
+- good for sparse graphs
+- efficient for dynamic graphs
+
+CONS:
+- not good for dense graphs
+- extra overhead space storage
+- slow to check edges
+
+
+## GRAPH TRAVERSAL
+
+Depth First Search (DFS)
+We need two more helper data strcuture a visited hashset, and a helper stack
+
+Steps:
+Start with any vertex and mark it as visited
+find all the neighbour of the nodes being visited (traverse the adjacency list)
+put all the unvisited above neighbours in stack
+pop top node in stack and put them in visited to continue with step 2(so now add the adjacency list elements of that node in stack)
+
+Now we stop traversing when stack becoems empty
+
+/* CODE */
+/* ITERATIVE METHOD */
+public void DFSIterative(int startVertex) {
+  HashSet<Integer> visited = new HashSet<>();
+  Stack<Integer> stack = new Stack<>();
+  stack.push(startVertex);
+  while(!stack.isEmpty()){  //Keep traversing until stack is empty
+    int currentVertex = stack.pop();   // Get an element from stack and mark as visited if we haven't visited it already
+    if (!visited.contains(currentVertex)){    
+      System.out.print(currentVertex + " ");
+      visited.add(currentVertex);
+      // Add all the unvisited neighbors of the curr vertex to stack
+      for (int neighbor : adjacencyList.getOrDefault(currentVertex, Collections.emptyList()))
+        if (!visited.contains(neighbor)) stack.push(neighbor);
+    }
+  }
+}
+
+TC - O(V+E) => each node and edge is traversed once
+SC - O(V) => space equal to number of vertexes required that will be the maximum space of stack and set
+
+/* RECURSIVE METHOD */
+public void DFS(int startVertex) {
+  HashSet<Integer> visited = new HashSet<>();
+  DFSRecursive(startVertex, visited);
+}
+
+private void DFSRecursive(int vertex, HashSet<Integer> visited) {
+  visited.add(vertex);    // Add the vertex to visited set
+  System.out.print(vertex + " ");
+  // Iterate through each neighbor of the vertex
+  for (int neighbor : adjacencyList.getOrDefault(vertex, Collections.emptyList()))
+    // perform dfs on the vertex, only when it has not been visited till yet
+    if (!visited.contains(neighbor)) DFSRecursive(neighbor, visited);
+  }
+}
+
+Why its called DFS?
+Becuase when you visit the first vertex, you take its neighbour, then you again takes the neighbour neighbour as you put them all in stack. So, you see you are going deep. that's why dfs.
+
+
+BREADTH FIRST SEARCH (BFS)
+Uses QUEUE
+
+/* CODE */
+/* ITERATIVE */
+public void BFSIterative(int startVertex) {
+  Set<Integer> visited = new HashSet<>();
+  Queue<Integer> queue = new LinkedList<>();
+  queue.add(startVertex);
+  visited.add(startVertex);
+  while (!queue.isEmpty()){   // Keep traversing till the queue is empty
+    // Get an element from the queue and mark as visited
+    int currentVertex = queue.poll();
+    System.out.print(currentVertex + " ");
+    // Add all the neighbors to the queue
+    for (int neighbor : adjacencyList.getOrDefault(currentVertex, Collections.emptyList()))
+      if (!visited.contains(neighbor)){
+        queue.add(neighbor);
+        visited.add(neighbor);
+      }
+  }
+}
+
+
+TOPOLOGICAL SORT
+Kahns algorithm
+find indegree
+Add all nodes with an indegree of 0 to the queue.
+While the queue is not empty:
+    Deque the first node from the queue and add it to the topological sort.
+    Decrement the indegree of each neighbor of the node. If this results in a neighbor having an indegree of 0, add it to the queue.
+    We have fully processed node 1, so now repeat the process of dequeuing and decrementing indegrees for the next node in the queue until the queue is empty.
+Return the topological order.
+
+SAME AS BFS
+The complexity of this algorithm is the same of BFS.
