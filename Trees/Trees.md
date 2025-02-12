@@ -330,3 +330,77 @@ class Solution {
     }
 }
 ```
+
+# Boundary Traversal of a Binary Tree [Amazon]
+```
+class Solution {
+    ArrayList<Integer> boundaryTraversal(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root==null) return ans;
+        // If the root is not a leaf, add its value to the result
+        if(!isLeaf(root)) ans.add(root.data);
+        addLeftBoundary(root, ans);
+        addLeaves(root, ans);
+        addRightBoundary(root, ans);
+        return ans;
+    }
+    
+    public static void addLeftBoundary(Node root, List<Integer> ans){
+        Node curr = root.left;
+        while (curr!=null) {
+            // If the current node is not a leaf, add its value to the result
+            if (!isLeaf(curr)) ans.add(curr.data);
+            // Move to the left child if it exists, otherwise move to the right child
+            if (curr.left!=null) curr=curr.left;
+            else curr=curr.right;
+        }
+    }
+    
+    public static void addLeaves(Node root, List<Integer> ans){
+        // If the current node is a leaf, add its value to the result
+        if (isLeaf(root)) {
+            ans.add(root.data);
+            return;
+        }
+        // Recursively add leaves of the left and right subtrees
+        if (root.left != null) addLeaves(root.left, ans);
+        if (root.right != null) addLeaves(root.right, ans);
+    }
+    
+    public static void addRightBoundary(Node root, List<Integer> ans){
+        Node curr = root.right;
+        List<Integer> temp = new ArrayList<>(); //Store values temporarily
+        while (curr!=null){
+            // If the current node is not a leaf, add its value to the result
+            if (!isLeaf(curr)) temp.add(curr.data);
+            // Move to the left child if it exists, otherwise move to the right child
+            if (curr.right!=null) curr=curr.right;
+            else curr=curr.left;
+        }
+        // Add right boundary nodes in reverse order
+        for (int i=temp.size()-1; i>=0; i--) {
+            ans.add(temp.get(i));
+        }
+    }
+    
+    public static boolean isLeaf(Node root) {
+        return (root.left==null && root.right==null);
+    }
+}
+
+/*
+LOGIC---
+Boundary Order Traversal
+Step I: Traverse the left boundary of the tree. 
+Start from the root and keep moving to the left child;
+if unavailable, move to the right child. Continue this until we reach a leaf node.
+
+Step II: Traverse the bottom boundary of the tree.
+By traversing the leaf nodes using a simple preorder traversal.
+We check if the current node is a lead, and if so, its value is added to the boundary traversal array. 
+
+Step III: Traverse the right boundary of the tree.
+The right boundary is traversed in the reverse direction, similar to the left boundary traversal
+starting from the root node and keep moving to the right child; if unavailable, move to the left child.
+Nodes that are not leaves are pushed into the right boundary array from end to start to ensure that they are added in the reverse direction.
+*/
